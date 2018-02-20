@@ -1,0 +1,20 @@
+From normal CMD prompt
+heroku login
+
+From GIT
+git init
+
+heroku git:remote -a ionic2-myquartet1-auth
+
+git add .
+
+git commit -m "comments"
+
+git push heroku master
+
+
+Other notes....
+Only need to login once per session.
+Then can just run the last three commands.
+Use Chrome with following script if CORS a problem...
+chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
