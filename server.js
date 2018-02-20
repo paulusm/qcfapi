@@ -1,3 +1,8 @@
+//Created By Alistair Dewar:20/02/2018
+//Entry point of service
+//Here we set up the ports on which the server will listen and attach our Router to our app.
+//It looks like we also set up other services on the App including JSON Parser, Logging etc....but still need to get my head round this
+
 var express  = require('express');
 var app      = express();
 var mongoose = require('mongoose');
