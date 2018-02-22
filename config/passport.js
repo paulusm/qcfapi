@@ -1,3 +1,5 @@
+//Still need to fully understand this file, but looks like it is handling the authentication itself with JWT...
+
 var passport = require('passport');
 var User = require('../app/models/user');
 var config = require('./auth');
