@@ -60,14 +60,24 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
         res.sendFile(__dirname + "/index.html");
     });
 
-    filesRoutes.post("/upload", function(req, res) {
-        upload(req, res, function(err) {
-            if (err) {
-                return res.end("Something went wrong!");
-            }
-            return res.end("File uploaded sucessfully!.");
-        });
-    });
+    filesRoutes.post('/', upload.single('avatar'), (req, res) => {
+        if (!req.file) {
+          console.log("No file received");
+          return res.send({
+            success: false
+          });
+      
+        } else {
+          console.log('file received');
+          const host = req.host;
+          const filePath = req.protocol + "://" + host + '/' + req.file.path;
+          console.log(host);
+          console.log(filePath);
+          return res.send({
+            success: true
+          })
+        }
+      });
 
 
     //filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
