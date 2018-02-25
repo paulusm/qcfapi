@@ -9,25 +9,9 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
- 
 var databaseConfig = require('./config/database');
 var router = require('./app/routes');
  
-// Multer Settings for file upload
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now()+ "_" + file.originalname)
-    }
-})
-
-var upload = multer({
-    storage: Storage
-}).array("imgUploader", 3); //Field name and max count
-
-
 
 mongoose.connect(databaseConfig.url);
  
