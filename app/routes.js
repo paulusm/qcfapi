@@ -25,8 +25,11 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
         authRoutes = express.Router(),
         eventsRoutes = express.Router(),
         themesRoutes = express.Router(),
-        filesRoutes = express.Router();
+        filesRoutes = express.Router(),
+        multer = require('multer'),
+        DIR = './uploads/';
  
+        var upload = multer({dest: DIR}).single('logo');
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
  
@@ -54,11 +57,12 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
     //Causes Routes
     apiRoutes.use('/files', filesRoutes);
     
-    filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
-    filesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.createFile);
-    filesRoutes.delete('/:file_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.deleteFile);
-  
-
+    //filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
+    //filesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.createFile);
+    //filesRoutes.delete('/:file_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.deleteFile);
+    
+    filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.getHome);
+    filesRoutes.post('/',requireAuth, AuthenticationController.roleAuthorization([]),FilesController.uploadFile);
     // Set up routes
     app.use('/api', apiRoutes);
  

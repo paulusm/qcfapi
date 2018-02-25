@@ -14,6 +14,26 @@ exports.getFiles = function(req, res, next){
 
 }
 
+exports.getHome = function(req,res,next){
+// render the index page, and pass data to it.
+    res.render('routes', {title:'Express'});
+
+}
+
+exports.uploadFile = function(req, res, next) {
+    var path = '';
+    upload(req, res, function (err) {
+       if (err) {
+         // An error occurred when uploading
+         console.log(err);
+         return res.status(422).send("an Error occured")
+       }  
+      // No error occured.
+       path = req.file.path;
+       return res.send("Upload Completed for "+path); 
+});
+}
+
 exports.createFile = function(req, res, next){
 
    File.create({
