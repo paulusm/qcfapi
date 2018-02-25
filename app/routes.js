@@ -61,8 +61,8 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
     //filesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.createFile);
     //filesRoutes.delete('/:file_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.deleteFile);
     
-    filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.getHome);
-    filesRoutes.post('/',requireAuth, AuthenticationController.roleAuthorization([]),FilesController.uploadFile);
+    filesRoutes.get('/',  FilesController.getHome);
+    filesRoutes.post('/', FilesController.uploadFile);
     // Set up routes
     app.use('/api', apiRoutes);
  
