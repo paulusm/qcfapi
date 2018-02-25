@@ -20,13 +20,19 @@ mongoose.connect(databaseConfig.url);
 app.listen(process.env.PORT || 8100, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
-
+  var corsOptions = {
+    origin: '*',
+    allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With', 'Accept'],
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 //app.listen(process.env.PORT || 8080);
 //console.log("App listening on port 8080");
 //app.use(express.static(__dirname, 'public'));
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
-app.use(cors());
+//app.use(cors());
  
 router(app);
