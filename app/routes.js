@@ -24,7 +24,8 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
         eventsRoutes = express.Router(),
-        themesRoutes = express.Router();
+        themesRoutes = express.Router(),
+        filesRoutes = express.Router();
  
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
