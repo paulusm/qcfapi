@@ -11,6 +11,7 @@
 var AuthenticationController = require('./controllers/authentication'),
 EventsController = require('./controllers/events'),
 ThemesController = require('./controllers/themes'), 
+FilesController = require('./controllers/files'),
 express = require('express'),
 passportService = require('../config/passport'),
 passport = require('passport');
