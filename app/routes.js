@@ -14,30 +14,14 @@ ThemesController = require('./controllers/themes'),
 FilesController = require('./controllers/files'),
 express = require('express'),
 passportService = require('../config/passport'),
-multer = require('multer'),
-passport = require('passport'),
-multiparty = require('connect-multiparty'),
-multipartyMiddleware = multiparty();
- 
+//multer = require('multer'),
+passport = require('passport');
+
 var requireAuth = passport.authenticate('jwt', {session: false}),
     requireLogin = passport.authenticate('local', {session: false});
-
+    
 module.exports = function(app){
- 
-/* // Multer Settings for file upload
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now()+ "_" + file.originalname)
-    }
-}) */
 
-/* var upload = multer({
-    storage: Storage
-}).array("imgUploader", 3); //Field name and max count
- */
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
         eventsRoutes = express.Router(),

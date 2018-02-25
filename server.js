@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+
 var databaseConfig = require('./config/database');
 var router = require('./app/routes');
  
