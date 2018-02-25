@@ -22,6 +22,7 @@ exports.getHome = function(req,res,next){
 
 exports.uploadFile = function(req, res, next) {
     var path = '';
+    console.log("backend uploadFile running");
     upload(req, res, function (err) {
        if (err) {
          // An error occurred when uploading

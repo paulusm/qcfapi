@@ -29,7 +29,7 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
         multer = require('multer'),
         DIR = './uploads/';
  
-        var upload = multer({dest: DIR}).single('logo');
+        var upload = multer({dest: DIR}).single('photo');
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
  
