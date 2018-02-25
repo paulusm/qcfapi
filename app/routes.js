@@ -53,16 +53,16 @@ module.exports = function(app){
     themesRoutes.delete('/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.deleteTheme);
     
     //Causes Routes
-    apiRoutes.use('/files', filesRoutes);
+    //apiRoutes.use('/files', filesRoutes);
     
     //filesRoutes.get("/", FilesController.getFiles);
 
-    filesRoutes.post('/upload', multipartyMiddleware, function(req, res) {
+    /* filesRoutes.post('/upload', multipartyMiddleware, function(req, res) {
         var file = req.files.file;
         console.log(file.name);
         console.log(file.type);
         console.log(file.path);
-      });
+      }); */
 
 
     //filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
