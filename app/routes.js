@@ -49,6 +49,13 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
     themesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), ThemesController.createTheme);
     themesRoutes.delete('/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['editor']), ThemesController.deleteTheme);
     
+    //Causes Routes
+    apiRoutes.use('/files', filesRoutes);
+    
+    filesRoutes.get('/', FilesController.getFiles);
+    filesRoutes.post('/', FilesController.createFile);
+    filesRoutes.delete('/:file_id', FilesController.deleteFile);
+  
 
     // Set up routes
     app.use('/api', apiRoutes);
