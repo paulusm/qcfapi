@@ -40,23 +40,23 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
     // Todo Routes
     apiRoutes.use('/events', eventsRoutes);
  
-    eventsRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), EventsController.getEvents);
-    eventsRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), EventsController.createEvent);
-    eventsRoutes.delete('/:event_id', requireAuth, AuthenticationController.roleAuthorization(['editor']), EventsController.deleteEvent);
+    eventsRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), EventsController.getEvents);
+    eventsRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), EventsController.createEvent);
+    eventsRoutes.delete('/:event_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), EventsController.deleteEvent);
  
     //Causes Routes
     apiRoutes.use('/themes', themesRoutes);
     
-    themesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), ThemesController.getThemes);
-    themesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), ThemesController.createTheme);
-    themesRoutes.delete('/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['editor']), ThemesController.deleteTheme);
+    themesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ThemesController.getThemes);
+    themesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.createTheme);
+    themesRoutes.delete('/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.deleteTheme);
     
     //Causes Routes
     apiRoutes.use('/files', filesRoutes);
     
-    filesRoutes.get('/', FilesController.getFiles);
-    filesRoutes.post('/', FilesController.createFile);
-    filesRoutes.delete('/:file_id', FilesController.deleteFile);
+    filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
+    filesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.createFile);
+    filesRoutes.delete('/:file_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.deleteFile);
   
 
     // Set up routes
