@@ -29,7 +29,6 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
         multer = require('multer'),
         DIR = './uploads/';
  
-        var upload = multer({dest: DIR}).single('photo');
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
  
@@ -57,12 +56,26 @@ var requireAuth = passport.authenticate('jwt', {session: false}),
     //Causes Routes
     apiRoutes.use('/files', filesRoutes);
     
+    filesRoutes.get("/", function(req,res){
+        res.sendFile(__dirname + "/index.html");
+    });
+
+    filesRoutes.post("/upload", function(req, res) {
+        upload(req, res, function(err) {
+            if (err) {
+                return res.end("Something went wrong!");
+            }
+            return res.end("File uploaded sucessfully!.");
+        });
+    });
+
+
     //filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
     //filesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.createFile);
     //filesRoutes.delete('/:file_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.deleteFile);
     
-    filesRoutes.get('/',  FilesController.getHome);
-    filesRoutes.post('/', FilesController.uploadFile);
+    //filesRoutes.get('/',  FilesController.getHome);
+    //filesRoutes.post('/', FilesController.uploadFile);
     // Set up routes
     app.use('/api', apiRoutes);
  
