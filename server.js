@@ -12,6 +12,7 @@ var cors = require('cors');
 var databaseConfig = require('./config/database');
 var router = require('./app/routes');
  
+//app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(databaseConfig.url);
  

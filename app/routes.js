@@ -15,14 +15,16 @@ FilesController = require('./controllers/files'),
 express = require('express'),
 passportService = require('../config/passport'),
 multer = require('multer'),
-passport = require('passport');
+passport = require('passport'),
+multiparty = require('connect-multiparty'),
+multipartyMiddleware = multiparty();
  
 var requireAuth = passport.authenticate('jwt', {session: false}),
     requireLogin = passport.authenticate('local', {session: false});
 
-    module.exports = function(app){
+module.exports = function(app){
  
-// Multer Settings for file upload
+/* // Multer Settings for file upload
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads')
@@ -30,13 +32,12 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now()+ "_" + file.originalname)
     }
-})
+}) */
 
-var upload = multer({
+/* var upload = multer({
     storage: Storage
 }).array("imgUploader", 3); //Field name and max count
-
-
+ */
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
         eventsRoutes = express.Router(),
@@ -70,27 +71,13 @@ var upload = multer({
     //Causes Routes
     apiRoutes.use('/files', filesRoutes);
     
-    filesRoutes.get("/", function(req,res){
-        res.sendFile(__dirname + "/index.html");
-    });
+    //filesRoutes.get("/", FilesController.getFiles);
 
-    filesRoutes.post('/', upload.single('avatar'), (req, res) => {
-        if (!req.file) {
-          console.log("No file received");
-          return res.send({
-            success: false
-          });
-      
-        } else {
-          console.log('file received');
-          const host = req.host;
-          const filePath = req.protocol + "://" + host + '/' + req.file.path;
-          console.log(host);
-          console.log(filePath);
-          return res.send({
-            success: true
-          })
-        }
+    filesRoutes.post('/api/upload', multipartyMiddleware, function(req, res) {
+        var file = req.files.file;
+        console.log(file.name);
+        console.log(file.type);
+        console.log(file.path);
       });
 
 
