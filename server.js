@@ -22,7 +22,7 @@ app.listen(process.env.PORT || 8100, function(){
 
 //app.listen(process.env.PORT || 8080);
 //console.log("App listening on port 8080");
-app.use(express.static(__dirname, 'public'));
+//app.use(express.static(__dirname, 'public'));
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan

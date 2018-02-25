@@ -73,7 +73,7 @@ var storage = multer.diskStorage({
     
     //filesRoutes.get("/", FilesController.getFiles);
 
-    filesRoutes.post('/api/upload', multipartyMiddleware, function(req, res) {
+    filesRoutes.post('/upload', multipartyMiddleware, function(req, res) {
         var file = req.files.file;
         console.log(file.name);
         console.log(file.type);
