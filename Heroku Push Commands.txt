@@ -1,5 +1,5 @@
 From normal CMD prompt
-heroku login
+winpty heroku login
 
 From GIT
 git init

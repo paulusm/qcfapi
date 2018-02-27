@@ -51,6 +51,8 @@ exports.register = function(req, res, next){
             return res.status(422).send({error: 'That email address is already in use'});
         }
  
+        //add company id check here....
+
         var user = new User({
             email: email,
             password: password,

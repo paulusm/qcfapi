@@ -17,7 +17,11 @@ var UserSchema = new mongoose.Schema({
         type: String,
         enum: ['Employee','BusinessAdmin','QCFAdmin'],
         default: 'Employee'
-    }
+    },
+    resetPasswordToken: string,
+    resetPasswordExpires:Date,
+    companyid:string,
+    department:string
  
 }, {
     timestamps: true
