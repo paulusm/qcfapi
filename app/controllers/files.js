@@ -1,4 +1,12 @@
+var mongoose = require('mongoose');
 var File = require('../models/file');
+var multer = require('multer');
+var databaseConfig = require('../../config/database');
+mongoose.connect(databaseConfig.url);
+var GridFsStorage = require('multer-gridfs-storage');
+var Grid = require('gridfs-stream');
+Grid.mongo = mongoose.mongo;
+var gfs = Grid(mongoose.connection.db);
 
 var storage = GridFsStorage({
     gfs : gfs,

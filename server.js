@@ -12,11 +12,7 @@ var cors = require('cors');
 
 var databaseConfig = require('./config/database');
 var router = require('./app/routes');
-var multer = require('multer');
-var GridFsStorage = require('multer-gridfs-storage');
-var Grid = require('gridfs-stream');
-Grid.mongo = mongoose.mongo;
-var gfs = Grid(conn.db);
+
 //app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(databaseConfig.url);
