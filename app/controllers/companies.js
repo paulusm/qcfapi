@@ -16,7 +16,7 @@ exports.getCompanies = function(req, res, next){
 }
  
 //Find and return a specific company by $oid
-exports.getCompanyByCompanyID = function(req, res, next){
+/* exports.getCompanyByCompanyID = function(req, res, next){
     var company_id = req.params.company_id;
     Company.findOne({company_id: company_id}, function(err, existingCompany){
     
@@ -32,7 +32,7 @@ exports.getCompanyByCompanyID = function(req, res, next){
            }
     });
 }
-
+ */
 
 exports.updateCompanies = function(req, res, next){
     Company.find(function(err, companies) {
