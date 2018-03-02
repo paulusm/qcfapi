@@ -52,11 +52,11 @@ module.exports = function(app){
     themesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.createTheme);
     themesRoutes.delete('/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.deleteTheme);
     
-    //Causes Routes
-    //apiRoutes.use('/files', filesRoutes);
+    //File Routes
+    apiRoutes.use('/files', filesRoutes);
     
-    //filesRoutes.get("/", FilesController.getFiles);
-
+    filesRoutes.get("/file/:filename", FilesController.getFile);
+    filesRoutes.post('/upload', FilesController.createFile);
     /* filesRoutes.post('/upload', multipartyMiddleware, function(req, res) {
         var file = req.files.file;
         console.log(file.name);
