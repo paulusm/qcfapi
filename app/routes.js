@@ -12,6 +12,7 @@ var AuthenticationController = require('./controllers/authentication'),
 EventsController = require('./controllers/events'),
 ThemesController = require('./controllers/themes'), 
 FilesController = require('./controllers/files'),
+CompaniesController = require('./controllers/companies'),
 express = require('express'),
 passportService = require('../config/passport'),
 //multer = require('multer'),
@@ -26,6 +27,7 @@ module.exports = function(app){
         authRoutes = express.Router(),
         eventsRoutes = express.Router(),
         themesRoutes = express.Router(),
+        companiesRoutes = express.Router(),
         filesRoutes = express.Router();
  
     // Auth Routes
@@ -57,20 +59,16 @@ module.exports = function(app){
     
     filesRoutes.get("/file/:filename", FilesController.getFile);
     filesRoutes.post('/upload', FilesController.createFile);
-    /* filesRoutes.post('/upload', multipartyMiddleware, function(req, res) {
-        var file = req.files.file;
-        console.log(file.name);
-        console.log(file.type);
-        console.log(file.path);
-      }); */
-
-
-    //filesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), FilesController.getFiles);
-    //filesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.createFile);
-    //filesRoutes.delete('/:file_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FilesController.deleteFile);
     
-    //filesRoutes.get('/',  FilesController.getHome);
-    //filesRoutes.post('/', FilesController.uploadFile);
+    apiRoutes.use('/companies', companiesRoutes);
+    companiesRoutes.get('/getCompanies', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.getCompanies);
+    companiesRoutes.get('/getCompanyByCompanyID/:company_id',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByCompanyID);
+    companiesRoutes.post('/createCompany', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.createCompany);
+    
+    
+    //companiesRoutes.delete();
+
+
     // Set up routes
     app.use('/api', apiRoutes);
  

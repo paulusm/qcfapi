@@ -10,7 +10,7 @@ var CompanySchema = new mongoose.Schema({
        type: String,
        required: true
    },
-   logopath: {
+   filename: {
        type: String,
        required: true
    },

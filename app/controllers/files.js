@@ -25,6 +25,8 @@ var upload = multer({ //multer settings for single upload
     storage: storage
 }).single('file');
 
+var gfilename;
+
 exports.getFile = function(req, res){
 
     gfs.collection('ctFiles'); //set collection name to lookup into
@@ -60,6 +62,7 @@ console.log("createFile Running");
          res.json({error_code:0,err_desc:null});
     });
     console.log("createFile Finished");
+    
 }
 
 exports.deleteFile = function(req, res, next){
