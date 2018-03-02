@@ -9,7 +9,6 @@ var mongoose = require('mongoose');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-
 var databaseConfig = require('./config/database');
 var router = require('./app/routes');
 
@@ -20,13 +19,14 @@ mongoose.connect(databaseConfig.url);
 app.listen(process.env.PORT || 8100, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
-  var corsOptions = {
+  /* var corsOptions = {
     origin: '*',
     allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With', 'Accept'],
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+  }*/
 //app.use(cors(corsOptions));
+
 app.use(function(req, res, next) { //allow cross origin requests
   res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
   res.header("Access-Control-Allow-Origin", "http://localhost:8100");

@@ -51,7 +51,7 @@ exports.getFile = function(req, res){
 }
 
 exports.createFile = function(req, res, next){
-
+console.log("createFile Running");
     upload(req,res,function(err){
         if(err){
              res.json({error_code:1,err_desc:err});
@@ -59,7 +59,7 @@ exports.createFile = function(req, res, next){
         }
          res.json({error_code:0,err_desc:null});
     });
-
+    console.log("createFile Finished");
 }
 
 exports.deleteFile = function(req, res, next){
