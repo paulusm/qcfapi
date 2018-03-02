@@ -1,4 +1,4 @@
-var Event = require('../models/company');
+var Company = require('../models/company');
 
 //Get all companies from database
 exports.getCompanies = function(req, res, next){
