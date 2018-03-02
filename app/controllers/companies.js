@@ -14,7 +14,7 @@ exports.getCompanies = function(req, res, next){
    });
 
 }
-
+ 
 //Find and return a specific company by $oid
 exports.getCompanyByCompanyID = function(req, res, next){
     var company_id = req.params.company_id;
