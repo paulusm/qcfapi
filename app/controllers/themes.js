@@ -17,16 +17,16 @@ exports.getThemes = function(req, res, next){
 exports.createTheme = function(req, res, next){
         
         console.log("Createing Theme");
-        console.log(req);
-        var name = req.name;
+        //console.log(req);
+        var name = req.body.name;
         console.log(name);
-        var areaname = req.areaname;
+        var areaname = req.body.areaname;
         console.log(areaname);
-        var subject = req.subject;
+        var subject = req.body.subject;
         console.log(subject);
-        var companyname = req.companyname;
+        var companyname = req.body.companyname;
         console.log(companyname);
-        var selected = req.selected;
+        var selected = req.body.selected;
         console.log(selected);
         console.log("Registering New Theme");
 
