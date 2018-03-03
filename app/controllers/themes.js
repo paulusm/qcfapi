@@ -17,21 +17,22 @@ exports.getThemes = function(req, res, next){
 exports.createTheme = function(req, res, next){
         
         console.log("Createing Theme");
-        var name = req.body.name;
+        console.log(req);
+        var name = req.name;
         console.log(name);
-        var areaname = req.body.areaname;
+        var areaname = req.areaname;
         console.log(areaname);
-        var subject = req.body.subject;
+        var subject = req.subject;
         console.log(subject);
-        var companyname = req.body.companyname;
+        var companyname = req.companyname;
         console.log(companyname);
-        var selected = req.body.selected;
+        var selected = req.selected;
         console.log(selected);
         console.log("Registering New Theme");
 
-        if(!id){
+        /* if(!id){
             return res.status(422).send({error: 'You must enter an ID'});
-        }
+        } */
 
         if(!areaname){
             return res.status(422).send({error: 'You must enter an areaname'});
