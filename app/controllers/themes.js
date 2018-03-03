@@ -18,7 +18,7 @@ exports.createTheme = function(req, res, next){
         
         console.log("Createing Theme");
         var name = req.body.name;
-        console.log(id);
+        console.log(name);
         var areaname = req.body.areaname;
         console.log(areaname);
         var subject = req.body.subject;
