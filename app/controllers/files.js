@@ -59,7 +59,8 @@ console.log("createFile Running");
              res.json({error_code:1,err_desc:err});
              return;
         }
-         res.json({error_code:0,err_desc:null});
+         lfilename = req.file.filename;
+         res.json({filename:lfilename,error_code:0,err_desc:null});
     });
     console.log("createFile Finished");
     
