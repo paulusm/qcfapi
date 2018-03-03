@@ -16,7 +16,7 @@ exports.getThemes = function(req, res, next){
 
 exports.createTheme = function(req, res, next){
         
-        console.log("Createing Theme");
+        console.log("Creating Theme");
         //console.log(req);
         var name = req.body.name;
         console.log(name);
@@ -30,22 +30,9 @@ exports.createTheme = function(req, res, next){
         console.log(selected);
         console.log("Registering New Theme");
 
-        /* if(!id){
-            return res.status(422).send({error: 'You must enter an ID'});
-        } */
-
         if(!areaname){
             return res.status(422).send({error: 'You must enter an areaname'});
         }
-
-        /* var causeitem = new CauseItem({
-            id: id,
-            areaname: areaname,
-            subject: subject,
-            companyname:companyname,
-            selected:selected
-        }); */
-
 
         Theme.create({
             name:name,
