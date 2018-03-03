@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 
 var ThemeSchema = new mongoose.Schema({
-
-    id: String,
+    name: String,
     areaname: String,
     subject:String,
     companyname:String,

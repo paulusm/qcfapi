@@ -17,7 +17,7 @@ exports.getThemes = function(req, res, next){
 exports.createTheme = function(req, res, next){
         
         console.log("Createing Theme");
-        var id = req.body.id;
+        var name = req.body.name;
         console.log(id);
         var areaname = req.body.areaname;
         console.log(areaname);
@@ -47,7 +47,7 @@ exports.createTheme = function(req, res, next){
 
 
         Theme.create({
-            id:id,
+            name:name,
             areaname:areaname,
             subject:subject,
             companyname:companyname,
