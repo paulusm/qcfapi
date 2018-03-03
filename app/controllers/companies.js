@@ -48,12 +48,25 @@ exports.updateCompanies = function(req, res, next){
 
 exports.createCompany = function(req, res, next){
 
+    console.log("Createing Company");
+    var companyname = req.body.companyname;
+    console.log(companyname);
+    var companydescription = req.body.companydescription;
+    console.log(companydescription);
+    var filename = req.body.filename;
+    console.log(filename);
+    var email = req.body.email;
+    console.log(email);
+    
+    console.log("Registering New Company");
+
+
    Company.create({
-       companyname : req.body.companyname,
-       companydescription : req.body.companydescription,
-       filename : req.body.filename,
-       email : req.body.email
-   }, function(err, company) {
+       companyname : companyname,
+       companydescription : companydescription,
+       filename : filename,
+       email : email
+   }, function(err, item) {
 
        if (err){
            res.send(err);
