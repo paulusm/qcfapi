@@ -19,15 +19,17 @@ exports.createTheme = function(req, res, next){
         console.log("Creating Theme");
         //console.log(req);
         var name = req.body.name;
-        var areas = req.body.areas;
+        var areasData = req.body.areas;
+
         console.log(name);
         console.log(areas);
         console.log("Registering New Theme");
 
         
+        
         Theme.create({
             name:name,
-            areas:areas
+            areas:JSON.parse(areasData)
             
         },
         function(err, item){
