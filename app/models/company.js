@@ -17,6 +17,10 @@ var CompanySchema = new mongoose.Schema({
    email: {
        type: String,
        required: true
+   },
+   themes: {
+       type:[Theme],
+       required:false
    }
 
 }, {

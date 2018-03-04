@@ -28,6 +28,7 @@ exports.createCompany = function(req, res, next){
     console.log(filename);
     var email = req.body.email;
     console.log(email);
+    var themes = req.body.themes;
     
     console.log("Registering New Company");
 
@@ -36,7 +37,8 @@ exports.createCompany = function(req, res, next){
        companyname : companyname,
        companydescription : companydescription,
        filename : filename,
-       email : email
+       email : email,
+       themes : themes
    }, function(err, item) {
 
        if (err){

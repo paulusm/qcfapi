@@ -19,27 +19,16 @@ exports.createTheme = function(req, res, next){
         console.log("Creating Theme");
         //console.log(req);
         var name = req.body.name;
+        var subThemes = req.body.subThemes;
         console.log(name);
-        var areaname = req.body.areaname;
-        console.log(areaname);
-        var subject = req.body.subject;
-        console.log(subject);
-        var companyname = req.body.companyname;
-        console.log(companyname);
-        var selected = req.body.selected;
-        console.log(selected);
+       
         console.log("Registering New Theme");
 
-        if(!areaname){
-            return res.status(422).send({error: 'You must enter an areaname'});
-        }
-
+        
         Theme.create({
             name:name,
-            areaname:areaname,
-            subject:subject,
-            companyname:companyname,
-            selected:selected
+            subThemes:subThemes
+            
         },
         function(err, item){
     
