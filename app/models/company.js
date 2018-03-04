@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Theme = require('theme');
+
 var CompanySchema = new mongoose.Schema({
 
    companyname: {
