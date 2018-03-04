@@ -19,7 +19,7 @@ exports.createTheme = function(req, res, next){
         console.log("Creating Theme");
         //console.log(req);
         var name = req.body.name;
-        var subThemes = req.body.subThemes;
+        var areas = req.body.areas;
         console.log(name);
        
         console.log("Registering New Theme");
@@ -27,7 +27,7 @@ exports.createTheme = function(req, res, next){
         
         Theme.create({
             name:name,
-            subThemes:subThemes
+            areas:areas
             
         },
         function(err, item){
@@ -45,28 +45,11 @@ exports.createTheme = function(req, res, next){
             res.json(themes);
 
         });
-               //var userInfo = setUserInfo(user);
-                   //res.status(201).json({
-               //    token: 'JWT ' + generateToken(userInfo),
-               //    user: userInfo
-               //})
+              
     
         });
 
-   /* CauseItem.create({
-      causeitem
-       // title : req.body.title
-   }, function(err, causeitem) {
-       if (err){
-           res.send(err);
-       }
-       CauseItem.find(function(err, causeitems) {
-           if (err){
-               res.send(err);
-           }
-           res.json(causeitems);
-       });
-   }); */
+  
 
 }
 

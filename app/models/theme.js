@@ -1,9 +1,14 @@
 var mongoose = require('mongoose');
 
-var ThemeSchema = new mongoose.Schema(
-    {
-    name:{type:String},
-    subThemes:{type:[SubTheme],required:false}
+var ThemeSchema = new mongoose.Schema({
+
+    name: {
+        type:String
+    },
+    areas: {
+        type:[Area],
+        required:false
+    }
 });
 
 
