@@ -29,7 +29,7 @@ exports.createTheme = function(req, res, next){
         
         Theme.create({
             name:name,
-            areas:JSON.parse(areasData)
+            areas:areasData
             
         },
         function(err, item){
