@@ -1,3 +1,4 @@
+var Area = require('./area.js');
 var mongoose = require('mongoose');
 
 
