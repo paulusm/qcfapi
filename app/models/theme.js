@@ -5,11 +5,7 @@ var ThemeSchema = new mongoose.Schema({
     name: {
         type:String
     },
-    areas: [{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Area',
-        required:false
-    }]
+    areas: [AreaSchema]
 });
 
 
