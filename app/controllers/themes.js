@@ -22,7 +22,7 @@ exports.createTheme = function(req, res, next){
         var areasData = req.body.areas;
 
         console.log(name);
-        console.log(areas);
+        console.log(areasData);
         console.log("Registering New Theme");
 
         
