@@ -36,7 +36,8 @@ function setUserInfoReg(request){
         department:request.body.depart,
         companyid:request.body.companyid,
         displayname:request.body.displayname,
-        isfirstlogin:request.body.isfirstlogin
+        isfirstlogin:request.body.isfirstlogin,
+        password:request.body.password
 
     };
 }
