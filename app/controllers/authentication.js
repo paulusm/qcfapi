@@ -110,8 +110,8 @@ exports.register = function(req, res, next){
             //var userInfo = setUserInfo(user);
             console.log('Returning User Object');
             res.status(201).json({
-                token: 'JWT ' + generateToken(userInfo),
-                user: userInfo
+                token: 'JWT ' + generateToken(userinfo),
+                user: userinfo
             })
  
         });
