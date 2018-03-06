@@ -10,6 +10,7 @@ function generateToken(user){
 }
  
 function setUserInfo(request){
+    console.log("setUserInfo:"+request)
     return {
         _id: request._id,
         email: request.email,
@@ -39,6 +40,7 @@ exports.login = function(req, res, next){
  
 exports.register = function(req, res, next){
  
+    console.log("Registering New User:"+ req)
     /* var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role; */
