@@ -14,6 +14,8 @@ function setUserInfo(request){
         _id: request._id,
         email: request.email,
         role: request.role,
+        forename: request.forename,
+        surname:'dewar'
         /* forname:request.forname,
         surname:request.surname,
         department:request.depart,
