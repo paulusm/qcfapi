@@ -48,25 +48,29 @@ exports.register = function(req, res, next){
 
     console.log("Registering New User");
     if(!userinfo.email){
+        console.log('You must enter an email address');
         return res.status(422).send({error: 'You must enter an email address'});
     }
  
     if(!userinfo.password){
+        console.log('You must enter a password');
         return res.status(422).send({error: 'You must enter a password'});
     }
  
     User.findOne({email: userinfo.email}, function(err, existingUser){
  
         if(err){
+            console.log('Error finding user');
             return next(err);
         }
  
         if(existingUser){
+            console.log('User already exists');
             return res.status(422).send({error: 'That email address is already in use'});
         }
  
         //add company id check here....
-
+        console.log('Creating User Object');
          var user = new User({
             email: userinfo.email,
             password: userinfo.password,
@@ -78,15 +82,16 @@ exports.register = function(req, res, next){
             imagepath: userinfo.imagepath,
             companyid: userinfo.companyid
         });
-  
+        console.log('Saving User Object');
         user.save(function(err, userinfo){
  
             if(err){
+                console.log('Error Saving User Object');
                 return next(err);
             }
  
             //var userInfo = setUserInfo(user);
- 
+            console.log('Returning User Object');
             res.status(201).json({
                 token: 'JWT ' + generateToken(userInfo),
                 user: userInfo
