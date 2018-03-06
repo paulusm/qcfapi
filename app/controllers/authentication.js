@@ -40,11 +40,11 @@ exports.login = function(req, res, next){
  
 exports.register = function(req, res, next){
  
-    console.log("Registering New User:"+ req)
+    console.log("Registering New User:"+ req.user)
     /* var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role; */
-    var userinfo = setUserInfo(req);
+    var userinfo = setUserInfo(req.user);
 
     console.log("Registering New User");
     if(!userinfo.email){
