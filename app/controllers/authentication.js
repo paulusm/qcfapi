@@ -61,9 +61,9 @@ exports.register = function(req, res, next){
     /* var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role; */
-    var userinfo = setUserInfoReg(JSON.stringify(req));
+    var userinfo = setUserInfoReg(req);
 
-    console.log("Registering New User");
+    console.log("Registering New User" + JSON.stringify(userinfo));
     if(!userinfo.email){
         console.log('You must enter an email address');
         return res.status(422).send({error: 'You must enter an email address'});
