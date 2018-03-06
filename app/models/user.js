@@ -44,12 +44,12 @@ var UserSchema = new mongoose.Schema({
     resetpasswordexpires:Date,
     companyid:{
         type:String,
-        required:true,
+        required:false,
         unique:false
     },
     department:{
         type:String,
-        required:true,
+        required:false,
         unique:false
     },
     imagepath:{
