@@ -3,6 +3,24 @@ var bcrypt   = require('bcrypt-nodejs');
  
 var UserSchema = new mongoose.Schema({
  
+    forename:{
+        type:String,
+        lowercase:true,
+        unique:false,
+        required:true
+    },
+    surname:{
+        type:String,
+        lowercase:true,
+        unique:false,
+        required:true
+    },
+    displayname:{
+        type:String,
+        lowercase:true,
+        unique:false,
+        required:true
+    },
     email: {
         type: String,
         lowercase: true,
@@ -18,10 +36,25 @@ var UserSchema = new mongoose.Schema({
         enum: ['Employee','BusinessAdmin','QCFAdmin'],
         default: 'Employee'
     },
-    resetPasswordToken: String,
-    resetPasswordExpires:Date,
-    companyid:String,
-    department:String
+    isfirstlogin: {
+        type:String,
+        default: 'Employee'
+    },
+    resetpasswordtoken: String,
+    resetpasswordexpires:Date,
+    companyid:{
+        type:String,
+        required:true,
+        unique:false
+    },
+    department:{
+        type:String,
+        required:true,
+        unique:false
+    },
+    imagepath:{
+        type:String
+    }
  
 }, {
     timestamps: true

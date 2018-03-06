@@ -2,6 +2,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var authConfig = require('../../config/auth');
  
+
 function generateToken(user){
     return jwt.sign(user, authConfig.secret, {
         expiresIn: 10080
@@ -12,10 +13,19 @@ function setUserInfo(request){
     return {
         _id: request._id,
         email: request.email,
-        role: request.role
+        role: request.role,
+        /* forname:request.forname,
+        surname:request.surname,
+        department:request.depart,
+        companyid:request.companyid,
+        displayname:request.displayname,
+        isfirstlogin:request.isfirstlogin, */
+
     };
 }
  
+//Actual login handled by passport. Need to return a full user object here
+//This method will only execute if login succesful, hence account is valid.
 exports.login = function(req, res, next){ 
  
     var userInfo = setUserInfo(req.user);
