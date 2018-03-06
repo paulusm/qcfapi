@@ -24,6 +24,22 @@ function setUserInfo(request){
 
     };
 }
+
+function setUserInfoReg(request){
+    console.log("setUserInfo:"+request)
+    return {
+        _id: request.body._id,
+        email: request.body.email,
+        role: request.body.role,
+        forname:request.body.forname,
+        surname:request.body.surname,
+        department:request.body.depart,
+        companyid:request.body.companyid,
+        displayname:request.body.displayname,
+        isfirstlogin:request.body.isfirstlogin
+
+    };
+}
  
 //Actual login handled by passport. Need to return a full user object here
 //This method will only execute if login succesful, hence account is valid.
@@ -40,11 +56,11 @@ exports.login = function(req, res, next){
  
 exports.register = function(req, res, next){
  
-    console.log("Registering New User:"+ req.user)
+    console.log("Registering New User:"+ req.body)
     /* var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role; */
-    var userinfo = setUserInfo(req.user);
+    var userinfo = setUserInfoReg(req);
 
     console.log("Registering New User");
     if(!userinfo.email){
