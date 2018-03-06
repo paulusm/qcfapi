@@ -14,14 +14,12 @@ function setUserInfo(request){
         _id: request._id,
         email: request.email,
         role: request.role,
-        forename: request.forename,
-        surname:'dewar'
-        /* forname:request.forname,
+        forname:request.forname,
         surname:request.surname,
         department:request.depart,
         companyid:request.companyid,
         displayname:request.displayname,
-        isfirstlogin:request.isfirstlogin, */
+        isfirstlogin:request.isfirstlogin
 
     };
 }
@@ -41,19 +39,21 @@ exports.login = function(req, res, next){
  
 exports.register = function(req, res, next){
  
-    var email = req.body.email;
+    /* var email = req.body.email;
     var password = req.body.password;
-    var role = req.body.role;
+    var role = req.body.role; */
+    var userinfo = setUserInfo(req);
+
     console.log("Registering New User");
-    if(!email){
+    if(!userinfo.email){
         return res.status(422).send({error: 'You must enter an email address'});
     }
  
-    if(!password){
+    if(!userinfo.password){
         return res.status(422).send({error: 'You must enter a password'});
     }
  
-    User.findOne({email: email}, function(err, existingUser){
+    User.findOne({email: userinfo.email}, function(err, existingUser){
  
         if(err){
             return next(err);
@@ -65,19 +65,25 @@ exports.register = function(req, res, next){
  
         //add company id check here....
 
-        var user = new User({
-            email: email,
-            password: password,
-            role: role
+         var user = new User({
+            email: userinfo.email,
+            password: userinfo.password,
+            role: userinfo.role,
+            forename: userinfo.forename,
+            surname: userinfo.surname,
+            department: userinfo.department,
+            displayname: userinfo.displayname,
+            imagepath: userinfo.imagepath,
+            companyid: userinfo.companyid
         });
- 
-        user.save(function(err, user){
+  
+        user.save(function(err, userinfo){
  
             if(err){
                 return next(err);
             }
  
-            var userInfo = setUserInfo(user);
+            //var userInfo = setUserInfo(user);
  
             res.status(201).json({
                 token: 'JWT ' + generateToken(userInfo),
