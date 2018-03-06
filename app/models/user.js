@@ -19,7 +19,7 @@ var UserSchema = new mongoose.Schema({
         type:String,
         lowercase:true,
         unique:false,
-        required:true
+        required:false
     },
     email: {
         type: String,
@@ -38,13 +38,13 @@ var UserSchema = new mongoose.Schema({
     },
     isfirstlogin: {
         type:String,
-        default: 'Employee'
+        default: 'true'
     },
     resetpasswordtoken: String,
     resetpasswordexpires:Date,
     companyid:{
         type:String,
-        required:false,
+        required:true,
         unique:false
     },
     department:{
@@ -53,7 +53,8 @@ var UserSchema = new mongoose.Schema({
         unique:false
     },
     imagepath:{
-        type:String
+        type:String,
+        required:false
     }
  
 }, {
