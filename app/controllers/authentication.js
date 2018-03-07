@@ -187,13 +187,13 @@ exports.forgot = function(req, res, next) {
             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-          req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-          done(err, 'done');
+          return next('An e-mail has been sent to ' + user.email + ' with further instructions.');
+          //done(err, 'done');
         });
       }
     ], function(err) {
       if (err) return next(err);
-      res.redirect('/forgot');
+      //res.redirect('/forgot');
     });
   };
 
@@ -201,13 +201,14 @@ exports.forgot = function(req, res, next) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
         req.flash('error', 'Password reset token is invalid or has expired.');
-        return res.redirect('/forgot');
+        return ('/forgot');
       }
-      res.render('reset', {
-        user: req.user
+      res.status(201).json({
+        user: user
+        });
       });
-    });
-  };
+    };
+  
 
   exports.resetpost = function(req, res) {
     async.waterfall([
