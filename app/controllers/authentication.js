@@ -166,7 +166,8 @@ exports.forgot = function(req, res, next) {
         User.findOne({ email: req.body.email }, function(err, user) {
           if (!user) {
             //req.flash('error', 'No account with that email address exists.');
-            return next('No account with that email address exists.');
+            console.log('Nothing Found');
+            return next(JSON.stringify('No account with that email address exists.'));
           }
   
           user.resetPasswordToken = token;
@@ -195,7 +196,8 @@ exports.forgot = function(req, res, next) {
             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-          return next('An e-mail has been sent to ' + user.email + ' with further instructions.');
+            console.log('SendMail Found');
+          return next(JSON.stringify('An e-mail has been sent to ' + user.email + ' with further instructions.'));
           //done(err, 'done');
         });
       }
@@ -209,7 +211,7 @@ exports.forgot = function(req, res, next) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
         //req.flash('error', 'Password reset token is invalid or has expired.');
-        return ('No account with that email address exists.');
+        return (JSON.stringify('No account with that email address exists.'));
       }
       res.status(201).json({
         user: user
