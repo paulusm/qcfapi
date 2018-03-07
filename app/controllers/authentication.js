@@ -248,16 +248,21 @@ exports.forgot = function(req, res, next) {
         });
       },
       function(user, done) {
-        var smtpTransport = nodemailer.createTransport('SMTP', {
-          service: 'SendGrid',
-          auth: {
-            user: '!!! YOUR SENDGRID USERNAME !!!',
-            pass: '!!! YOUR SENDGRID PASSWORD !!!'
-          }
-        });
-        var mailOptions = {
-          to: user.email,
-          from: 'passwordreset@demo.com',
+        var smtpTransport = nodemailer.createTransport({
+            host:"smtp-mail.outlook.com",
+            //service: 'Hotmail',
+            port:587,
+            tls:{
+                ciphers:'SSLv3'
+            },
+            auth: {
+              user: 'al_dewar@hotmail.com',
+              pass: '"ws3ed741'
+            }
+          });
+          var mailOptions = {
+            to: user.email,
+            from: 'al_dewar@hotmail.com',
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
