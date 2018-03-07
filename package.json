@@ -10,6 +10,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "async-waterfall": "^0.1.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",

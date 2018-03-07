@@ -2,6 +2,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var authConfig = require('../../config/auth');
 var waterfall = require('async-waterfall');
+var async = require('async');
 
 function generateToken(user){
     return jwt.sign(user, authConfig.secret, {
