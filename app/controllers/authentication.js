@@ -181,8 +181,13 @@ exports.forgot = function(req, res, next) {
         });
       },
       function(token, user, done) {
-        var smtpTransport = nodemailer.createTransport('SMTP', {
-          service: 'Hotmail',
+        var smtpTransport = nodemailer.createTransport({
+          host:"smtp-mail.outlook.com",
+          //service: 'Hotmail',
+          port:587,
+          tls:{
+              ciphers:'SSLv3'
+          },
           auth: {
             user: 'al_dewar@hotmail.com',
             pass: '"ws3ed741'
