@@ -154,6 +154,8 @@ exports.roleAuthorization = function(roles){
 }
 
 exports.forgot = function(req, res, next) {
+    
+    console.log('Starting forgot');
     async.waterfall([
       function(done) {
         crypto.randomBytes(20, function(err, buf) {
