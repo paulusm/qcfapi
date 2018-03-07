@@ -35,8 +35,8 @@ module.exports = function(app){
  
     authRoutes.post('/register', AuthenticationController.register);
     authRoutes.post('/forgot', AuthenticationController.login);
-    authRoutes.get('/reset/:token', AuthenticationController.reset)
-    authRoutes.post('/reset/:token', AuthenticationController.reset)
+    authRoutes.get('/reset/:token', AuthenticationController.resetget)
+    authRoutes.post('/reset/:token', AuthenticationController.resetpost)
     authRoutes.post('/login', requireLogin, AuthenticationController.login);
  
     authRoutes.get('/protected', requireAuth, function(req, res){
