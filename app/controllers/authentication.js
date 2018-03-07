@@ -165,7 +165,7 @@ exports.forgot = function(req, res, next) {
         User.findOne({ email: req.body.email }, function(err, user) {
           if (!user) {
             req.flash('error', 'No account with that email address exists.');
-            return res.redirect('/forgot');
+            return next('No account with that email address exists.');
           }
   
           user.resetPasswordToken = token;
@@ -207,8 +207,8 @@ exports.forgot = function(req, res, next) {
   exports.resetget = function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
-        req.flash('error', 'Password reset token is invalid or has expired.');
-        return ('/forgot');
+        //req.flash('error', 'Password reset token is invalid or has expired.');
+        return ('No account with that email address exists.');
       }
       res.status(201).json({
         user: user
@@ -222,8 +222,8 @@ exports.forgot = function(req, res, next) {
       function(done) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
-            req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('back');
+            //req.flash('error', 'Password reset token is invalid or has expired.');
+            return 'Password reset token is invalid or has expired.';
           }
   
           user.password = req.body.password;
@@ -253,7 +253,7 @@ exports.forgot = function(req, res, next) {
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-          req.flash('success', 'Success! Your password has been changed.');
+          //req.flash('success', 'Success! Your password has been changed.');
           done(err);
         });
       }
