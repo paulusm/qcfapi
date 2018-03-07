@@ -169,7 +169,7 @@ exports.forgot = function(req, res, next) {
           if (!user) {
             //req.flash('error', 'No account with that email address exists.');
             console.log('Nothing Found');
-            return next(JSON.stringify('No account with that email address exists.'));
+            return JSON.stringify('No account with that email address exists.');
           }
   
           user.resetPasswordToken = token;
@@ -182,10 +182,10 @@ exports.forgot = function(req, res, next) {
       },
       function(token, user, done) {
         var smtpTransport = nodemailer.createTransport('SMTP', {
-          service: 'SendGrid',
+          service: 'Hotmail',
           auth: {
-            user: '!!! YOUR SENDGRID USERNAME !!!',
-            pass: '!!! YOUR SENDGRID PASSWORD !!!'
+            user: 'al_dewar@hotmail.com',
+            pass: '"ws3ed741'
           }
         });
         var mailOptions = {
@@ -199,7 +199,7 @@ exports.forgot = function(req, res, next) {
         };
         smtpTransport.sendMail(mailOptions, function(err) {
             console.log('SendMail Found');
-          return next(JSON.stringify('An e-mail has been sent to ' + user.email + ' with further instructions.'));
+          return JSON.stringify('An e-mail has been sent to ' + user.email + ' with further instructions.');
           //done(err, 'done');
         });
       }
