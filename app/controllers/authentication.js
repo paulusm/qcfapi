@@ -197,7 +197,7 @@ exports.forgot = function(req, res, next) {
     });
   };
 
-  exports.reset = function(req, res) {
+  exports.resetget = function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
         req.flash('error', 'Password reset token is invalid or has expired.');
@@ -209,7 +209,7 @@ exports.forgot = function(req, res, next) {
     });
   };
 
-  exports.reset = function(req, res) {
+  exports.resetpost = function(req, res) {
     async.waterfall([
       function(done) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
