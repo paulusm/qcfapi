@@ -1,8 +1,14 @@
 var jwt = require('jsonwebtoken'); 
 var User = require('../models/user');
 var authConfig = require('../../config/auth');
-var waterfall = require('async-waterfall');
+var session = require('express-session')
+var mongoose = require('mongoose');
+var nodemailer = require('nodemailer');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt-nodejs');
 var async = require('async');
+var crypto = require('crypto');
 
 function generateToken(user){
     return jwt.sign(user, authConfig.secret, {
