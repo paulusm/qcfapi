@@ -164,7 +164,7 @@ exports.forgot = function(req, res, next) {
       function(token, done) {
         User.findOne({ email: req.body.email }, function(err, user) {
           if (!user) {
-            req.flash('error', 'No account with that email address exists.');
+            //req.flash('error', 'No account with that email address exists.');
             return next('No account with that email address exists.');
           }
   
