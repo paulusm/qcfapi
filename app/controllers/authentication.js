@@ -171,9 +171,9 @@ exports.forgot = function(req, res, next) {
             console.log('Nothing Found');
             return JSON.stringify('No account with that email address exists.');
           }
-  
-          user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+          console.log(user);
+          user.resetpasswordtoken = token;
+          user.resetpasswordexpires = Date.now() + 3600000; // 1 hour
   
           user.save(function(err) {
             done(err, token, user);
