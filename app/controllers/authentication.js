@@ -233,7 +233,7 @@ exports.forgot = function(req, res, next) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
             //req.flash('error', 'Password reset token is invalid or has expired.');
-            return 'Password reset token is invalid or has expired.';
+            return (JSON.stringify('Password reset token is invalid or has expired.'));
           }
   
           user.password = req.body.password;
@@ -241,9 +241,9 @@ exports.forgot = function(req, res, next) {
           user.resetPasswordExpires = undefined;
   
           user.save(function(err) {
-            req.logIn(user, function(err) {
+            //req.logIn(user, function(err) {
               done(err, user);
-            });
+            //});
           });
         });
       },
@@ -273,6 +273,7 @@ exports.forgot = function(req, res, next) {
         });
       }
     ], function(err) {
-      res.redirect('/');
+      //res.redirect('/');
+      return (JSON.stringify('Password reset complete.'));
     });
   };
