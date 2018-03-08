@@ -78,5 +78,23 @@ exports.deleteCompany = function(req, res, next){
    }, function(err, company) {
        res.json(company);
    });
-
 }
+
+   exports.getCompanyByName = function(req,res,next){
+
+    var companyname = req.companyname;
+
+    Company.findOne({companyname: companyname}, function(err, existingCompany){
+        
+               if(err){
+                   return next(err);
+               }
+        
+               if(!existingCompany){
+                   return res.status(422).send({error: 'Cannot find this company, this company does not exist'});
+               }
+
+               res.json(existingCompany); 
+
+            });
+    }

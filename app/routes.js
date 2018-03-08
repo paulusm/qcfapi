@@ -65,7 +65,7 @@ module.exports = function(app){
     
     apiRoutes.use('/companies', companiesRoutes);
     companiesRoutes.get('/getCompanies', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.getCompanies);
-    //companiesRoutes.get('/getCompanyByCompanyID/:company_id',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByCompanyID);
+    companiesRoutes.get('/getCompanyByCompanyName/:companyname',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByName);
     companiesRoutes.post('/createCompany', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.createCompany);
     
     
