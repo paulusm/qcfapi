@@ -81,9 +81,9 @@ exports.deleteCompany = function(req, res, next){
 }
 
    exports.getCompanyByName = function(req,res,next){
-    console.log(req.companyname);
-    var companyname = decodeURI(req.companyname);
-    console.log(companyname);
+    console.log("Before:" + req.params.companyname);
+    var companyname = decodeURI(req.params.companyname);
+    console.log("After: " + companyname);
     Company.findOne({companyname: companyname}, function(err, existingCompany){
         
                if(err){
