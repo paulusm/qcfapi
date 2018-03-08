@@ -198,8 +198,8 @@ exports.forgot = function(req, res, next) {
           from: 'al_dewar@hotmail.com',
           subject: 'Node.js Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            'http://' + req.headers.host + '/api/auth/reset/' + token + '\n\n' +
+            'Please click on the following code:\n\n' +
+            token + '\n\n' +
             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
@@ -230,15 +230,15 @@ exports.forgot = function(req, res, next) {
   exports.resetpost = function(req, res) {
     async.waterfall([
       function(done) {
-        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        User.findOne({ resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
             //req.flash('error', 'Password reset token is invalid or has expired.');
-            return (JSON.stringify('Password reset token is invalid or has expired.'));
+            return res.json('Password reset token is invalid or has expired.');
           }
   
-          user.password = req.body.password;
-          user.resetPasswordToken = undefined;
-          user.resetPasswordExpires = undefined;
+          user.password = req.body.newpassword;
+          user.resetpasswordtoken = undefined;
+          user.resetpasswordexpires = undefined;
   
           user.save(function(err) {
             //req.logIn(user, function(err) {
@@ -274,6 +274,6 @@ exports.forgot = function(req, res, next) {
       }
     ], function(err) {
       //res.redirect('/');
-      return (JSON.stringify('Password reset complete.'));
+      res.json('Password reset complete.');
     });
   };
