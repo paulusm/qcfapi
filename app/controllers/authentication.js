@@ -204,12 +204,16 @@ exports.forgot = function(req, res, next) {
         };
         smtpTransport.sendMail(mailOptions, function(err) {
             console.log('SendMail Found');
-          return JSON.stringify('An e-mail has been sent to ' + user.email + ' with further instructions.');
+          res.json('An e-mail has been sent to ' + user.email + ' with further instructions.');
+          next();
           //done(err, 'done');
         });
       }
     ], function(err) {
-      if (err) return next(err);
+      if (err){
+          next(err);
+          return;
+      } 
       //res.redirect('/forgot');
     });
   };
@@ -218,7 +222,7 @@ exports.forgot = function(req, res, next) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
         //req.flash('error', 'Password reset token is invalid or has expired.');
-        return (JSON.stringify('No account with that email address exists.'));
+        res.json('No account with that email address exists.');
       }
       res.status(201).json({
         user: user
@@ -233,7 +237,7 @@ exports.forgot = function(req, res, next) {
         User.findOne({ resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
             //req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.json('Password reset token is invalid or has expired.');
+            res.json('Password reset token is invalid or has expired.');
           }
   
           user.password = req.body.newpassword;
