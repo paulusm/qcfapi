@@ -1,5 +1,9 @@
 var jwt = require('jsonwebtoken'); 
 var User = require('../models/user');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt-nodejs');
 //var authConfig = require('../../config/auth');
  
 
@@ -41,11 +45,13 @@ exports.updateprofile = function(req, res, next){
  
         //add company id check here....
         existingUser.companyid = req.companyid;
-        existingUser.forname = req.forname;
+        existingUser.forname = req.forename;
         existingUser.surname = req.surname;
         existingUser.department = req.department;
         existingUser.displayname = req.displayname;
         existingUser.imagepath = req.imagepath;
+        existingUser.role = req.role;
+        existingUser.isfirstlogin = req.isfirstlogin;
  
         user.save(function(err, user){
  

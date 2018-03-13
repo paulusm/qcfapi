@@ -104,7 +104,8 @@ exports.register = function(req, res, next){
             department: userinfo.department,
             displayname: userinfo.displayname,
             imagepath: userinfo.imagepath,
-            companyid: userinfo.companyid
+            companyid: userinfo.companyid,
+            isfirstlogin: 'true'
         });
         console.log('Saving User Object');
         user.save(function(err, userinfo){
@@ -151,6 +152,44 @@ exports.roleAuthorization = function(roles){
  
     }
  
+}
+
+exports.changepassword = function(req, res, next) {
+ 
+        User.findById(req.user._id, function(err, existingUser){
+          if (!existingUser) {
+            //req.flash('error', 'Password reset token is invalid or has expired.');
+            res.json('This user does not exist.');
+          }
+
+          var userInfo = setUserInfo(req.user);
+          
+             res.status(200).json({
+                 token: 'JWT ' + generateToken(userInfo),
+                 user: userInfo
+             });
+
+          //User must be authenticated to call this function to only need to change password...
+          //Of course will need to re-authenticate and pass new token back in response
+          user.password = req.body.newpassword;
+          user.resetpasswordtoken = undefined;
+          user.resetpasswordexpires = undefined;
+  
+          user.save(function(err) {
+
+            if(err){
+              res.status(422).json({error: 'No user found.'});
+              return next(err);
+            }
+            //req.logIn(user, function(err) {
+              res.status(200).json({
+                token: 'JWT ' + generateToken(userInfo),
+                user: userInfo
+              });
+              next();
+            //});
+          });
+        });
 }
 
 exports.forgot = function(req, res, next) {

@@ -16,7 +16,8 @@ CompaniesController = require('./controllers/companies'),
 express = require('express'),
 passportService = require('../config/passport'),
 //multer = require('multer'),
-passport = require('passport');
+passport = require('passport'),
+UsersController = require('./controllers/users');
 
 var requireAuth = passport.authenticate('jwt', {session: false}),
     requireLogin = passport.authenticate('local', {session: false});
@@ -38,7 +39,9 @@ module.exports = function(app){
     //authRoutes.get('/reset/:token', AuthenticationController.resetget)
     authRoutes.post('/resetchg', AuthenticationController.resetpost)
     authRoutes.post('/login', requireLogin, AuthenticationController.login);
- 
+    authRoutes.post('/changepassword', requireLogin, AuthenticationController.changepassword);
+    authRoutes.post('/updateprofile', requireLogin, UsersController.updateprofile);
+    
     authRoutes.get('/protected', requireAuth, function(req, res){
         res.send({ content: 'Success'});
     });

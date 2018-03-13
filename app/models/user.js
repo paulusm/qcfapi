@@ -7,13 +7,13 @@ var UserSchema = new mongoose.Schema({
         type:String,
         lowercase:true,
         unique:false,
-        required:true
+        required:false
     },
     surname:{
         type:String,
         lowercase:true,
         unique:false,
-        required:true
+        required:false
     },
     displayname:{
         type:String,
@@ -40,8 +40,14 @@ var UserSchema = new mongoose.Schema({
         type:String,
         default: 'true'
     },
-    resetpasswordtoken: String,
-    resetpasswordexpires:Date,
+    resetpasswordtoken: {
+        type:String,
+        required:false
+    },
+    resetpasswordexpires: {
+        type:Date,
+        required:false
+    },
     companyid:{
         type:String,
         required:true,
