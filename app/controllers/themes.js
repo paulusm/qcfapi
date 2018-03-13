@@ -43,7 +43,7 @@ exports.createTheme = function(req, res, next){
             if (err){
                 res.send(err);
             }
-
+            console.log(themes);
             res.json(themes);
 
         });
@@ -58,7 +58,7 @@ exports.createTheme = function(req, res, next){
 exports.deleteTheme = function(req, res, next){
 
    Theme.remove({
-       _id : req.params.theme_id
+       name : req.params.theme_id
    }, function(err, theme) {
        res.json(theme);
    });

@@ -154,6 +154,7 @@ exports.roleAuthorization = function(roles){
  
 }
 
+//change password performs a login first..
 exports.changepassword = function(req, res, next) {
  
         User.findById(req.user._id, function(err, existingUser){
