@@ -105,56 +105,6 @@ exports.updateCompanies = function(req, res, next){
 }
 
 
-
-
-exports.updateprofile = function(req, res, next){
-    
-       var email = req.body.email;
-   
-       console.log("Updating User Profile:" + email);
-       if(!email){
-           return res.status(422).send({error: 'You must enter an email address'});
-       }
-    
-       
-       User.findOne({email: email}, function(err, existingUser){
-           
-           if(err){
-               return next(err);
-           }
-    
-           if(!existingUser){
-               return res.status(422).send({error: 'Cannot find your profile, this user does not exist'});
-           }
-           console.log("Found user and updating");
-           //add company id check here....
-           existingUser.companyid = req.body.companyid;
-           existingUser.forename = req.body.forename;
-           existingUser.surname = req.body.surname;
-           existingUser.department = req.body.department;
-           existingUser.displayname = req.body.displayname;
-           existingUser.imagepath = req.body.imagepath;
-           existingUser.role = req.body.role;
-           //existingUser.isfirstlogin = "false";
-    
-           existingUser.save(function(err, user){
-    
-               if(err){
-                   return next(err);
-               }
-    
-               //var userInfo = setUserInfo(user);
-    
-               res.status(201).json({
-                   user: existingUser
-               })
-    
-           });
-    
-       });
-    
-   }
-
 exports.deleteCompany = function(req, res, next){
 
    Company.remove({
