@@ -167,14 +167,14 @@ exports.changepassword = function(req, res, next) {
           }
           console.log("User Email:" + req.user.email);
           console.log("User password:" + req.user.password);
-          console.log("User newpassword:" + req.user.newpassword);
+          //console.log("User newpassword:" + req.user.password);
           //User will already be authenticated with old password at this point
           //Need to change password to newpassword and generate new token
           //var userInfo = setUserInfo(req.user);
           console.log("Creating new user object");
           var userInfo = new User({
             email: req.user.email,
-            password: req.user.newpassword,
+            password: req.user.password,
             role: existingUser.role,
             forename: existingUser.forename,
             surname: existingUser.surname,
