@@ -60,16 +60,100 @@ exports.createCompany = function(req, res, next){
 }
 
 exports.updateCompanies = function(req, res, next){
-    Company.find(function(err, companies) {
+    
+    var companyname = req.body.company;
+    
+    console.log("Updating Company Profile:" + companyname);
+    if(!companyname){
+        return res.status(422).send({error: 'You must enter a company name'});
+    }
+
+    Company.findOne({companyname: companyname},function(err, company) {
         
                if (err){
-                   res.send(err);
+                   return next(err);
                }
         
-               res.json(companies);
+
+               if(!company){
+                return res.status(422).send({error: 'Cannot find your company.'});
+                }
+
+                console.log("Found company and updating");
+
+                company.companyname = req.body.companyname;
+                company.companydescription = req.body.companydescription;
+                company.email = req.body.email;
+                company.filename = req.body.filename;
+                company.themes = req.body.themes;
+
+                company.save(function(err, company){
+    
+                if(err){
+                    return next(err);
+                }
+    
+                //var userInfo = setUserInfo(user);
+        
+                res.status(201).json({
+                    company: company
+                })
+    
+                });
         
            });
 }
+
+
+
+
+exports.updateprofile = function(req, res, next){
+    
+       var email = req.body.email;
+   
+       console.log("Updating User Profile:" + email);
+       if(!email){
+           return res.status(422).send({error: 'You must enter an email address'});
+       }
+    
+       
+       User.findOne({email: email}, function(err, existingUser){
+           
+           if(err){
+               return next(err);
+           }
+    
+           if(!existingUser){
+               return res.status(422).send({error: 'Cannot find your profile, this user does not exist'});
+           }
+           console.log("Found user and updating");
+           //add company id check here....
+           existingUser.companyid = req.body.companyid;
+           existingUser.forename = req.body.forename;
+           existingUser.surname = req.body.surname;
+           existingUser.department = req.body.department;
+           existingUser.displayname = req.body.displayname;
+           existingUser.imagepath = req.body.imagepath;
+           existingUser.role = req.body.role;
+           //existingUser.isfirstlogin = "false";
+    
+           existingUser.save(function(err, user){
+    
+               if(err){
+                   return next(err);
+               }
+    
+               //var userInfo = setUserInfo(user);
+    
+               res.status(201).json({
+                   user: existingUser
+               })
+    
+           });
+    
+       });
+    
+   }
 
 exports.deleteCompany = function(req, res, next){
 
