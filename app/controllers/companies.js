@@ -59,7 +59,7 @@ exports.createCompany = function(req, res, next){
 
 }
 
-exports.updateCompanies = function(req, res, next){
+exports.updateCompany = function(req, res, next){
     
     var companyname = req.body.company;
     
