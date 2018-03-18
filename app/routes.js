@@ -17,7 +17,7 @@ express = require('express'),
 passportService = require('../config/passport'),
 //multer = require('multer'),
 passport = require('passport');
-//UsersController = require('./controllers/users');
+UsersController = require('./controllers/users');
 
 var requireAuth = passport.authenticate('jwt', {session: false}),
     requireLogin = passport.authenticate('local', {session: false});
