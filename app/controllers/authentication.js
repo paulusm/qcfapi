@@ -157,7 +157,7 @@ exports.roleAuthorization = function(roles){
 //change password performs a login first..
 exports.changepassword = function(req, res, next) {
 
-  console.log("Changing User Password:"+ JSON.stringify(req.body));
+        console.log("Changing User Password:"+ JSON.stringify(req.body));
 
         User.findOne({email:req.user.email}, function(err, existingUser){
           if (!existingUser) {
@@ -165,7 +165,9 @@ exports.changepassword = function(req, res, next) {
             console.log("This user does not exist.");
             res.json('This user does not exist.');
           }
-
+          console.log("User Email:" + req.user.email);
+          console.log("User password:" + req.user.password);
+          console.log("User newpassword:" + req.user.newpassword);
           //User will already be authenticated with old password at this point
           //Need to change password to newpassword and generate new token
           //var userInfo = setUserInfo(req.user);
@@ -184,6 +186,8 @@ exports.changepassword = function(req, res, next) {
             resetpasswordtoken: undefined,
             resetpasswordexpires: undefined
         });
+
+
              /* res.status(200).json({
                  token: 'JWT ' + generateToken(userInfo),
                  user: userInfo
