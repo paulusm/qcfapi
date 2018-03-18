@@ -174,20 +174,23 @@ exports.changepassword = function(req, res, next) {
           User.update(
             {email:existingUser.email}, 
             {$set:{email:req.user.password,isfirstlogin:"false"}},
-            {upsert:false}
-          ), function(err, result){
+            {upsert:false}, 
+            function(err, result){
             
 
             if(err){
               res.status(422).json({error: 'Problem Updating User.'});
               return next(err);
-            }else{res.status(201).json({
+            }
+              res.status(201).json({
                 token: 'JWT ' + generateToken(userinfo),
                 user: userinfo
-              });
-            };
+             });
 
-          }
+           });
+            
+            return next();
+         
         });
                  
       }
