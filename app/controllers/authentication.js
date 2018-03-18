@@ -167,15 +167,15 @@ exports.changepassword = function(req, res, next) {
           //Need to change password to newpassword and generate new token
           //var userInfo = setUserInfo(req.user);
           var userInfo = new User({
-            email: req.body.email,
-            password: req.body.newpassword,
-            role: req.body.role,
-            forename: req.body.forename,
-            surname: req.body.surname,
-            department: req.body.department,
-            displayname: req.body.displayname,
-            imagepath: req.body.imagepath,
-            companyid: req.body.companyid,
+            email: req.email,
+            password: req.newpassword,
+            role: req.role,
+            forename: req.forename,
+            surname: req.surname,
+            department: req.department,
+            displayname: req.displayname,
+            imagepath: req.imagepath,
+            companyid: req.companyid,
             isfirstlogin: 'false',
             resetpasswordtoken: undefined,
             resetpasswordexpires: undefined
