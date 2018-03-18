@@ -183,8 +183,8 @@ exports.changepassword = function(req, res, next) {
               return next(err);
             }
               res.status(201).json({
-                token: 'JWT ' + generateToken(userinfo),
-                user: userinfo
+                token: 'JWT ' + generateToken(result),
+                user: result
              });
 
            });
