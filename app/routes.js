@@ -53,11 +53,11 @@ module.exports = function(app){
 
 
     // Todo Routes
-    apiRoutes.use('/events', activitiesRoutes);
+    apiRoutes.use('/activities', activitiesRoutes);
  
     activitiesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getEvents);
     activitiesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createEvent);
-    activitiesRoutes.delete('/:event_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteEvent);
+    activitiesRoutes.delete('/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteEvent);
  
     //Causes Routes
     apiRoutes.use('/themes', themesRoutes);

@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
+var User = require('../models/user');
 //var authConfig = require('../../config/auth');
  
 
@@ -23,6 +24,23 @@ function setUserInfo(request){
 }
  
  
+//Get all companies from database
+exports.getUsers = function(req, res, next){
+    
+       User.find(function(err, users) {
+    
+           if (err){
+               res.send(err);
+           }
+    
+           res.json(users);
+    
+       });
+    
+    }
+     
+    
+
 exports.updateprofile = function(req, res, next){
  
     var email = req.email;
