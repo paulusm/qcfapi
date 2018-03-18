@@ -201,7 +201,7 @@ exports.changepassword = function(req, res, next) {
           //userInfo.resetpasswordtoken = undefined;
           //userInfo.resetpasswordexpires = undefined;
    
-          existingUser.save(function(err) {
+          existingUser.save(function(err, userinfo) {
 
             if(err){
               res.status(422).json({error: 'Problem Updating User.'});
@@ -209,10 +209,10 @@ exports.changepassword = function(req, res, next) {
             }
             //req.logIn(user, function(err) {
               res.status(201).json({
-                token: 'JWT ' + generateToken(existingUser),
-                user: existingUser
+                token: 'JWT ' + generateToken(userinfo),
+                user: userinfo
               });
-              next();
+              //next();
             //});
           });
         });
