@@ -29,6 +29,7 @@ module.exports = function(app){
         activitiesRoutes = express.Router(),
         themesRoutes = express.Router(),
         companiesRoutes = express.Router(),
+        usersRoutes = express.Router(),
         filesRoutes = express.Router();
  
     // Auth Routes
