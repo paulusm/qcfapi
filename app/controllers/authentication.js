@@ -168,7 +168,7 @@ exports.changepassword = function(req, res, next) {
 
           function(token, done) {
             
-            User.findOne({email:req.user.email}, function(err, existingUser){
+            User.findOne({email:req.email}, function(err, existingUser){
           
             if (!existingUser) {
               //req.flash('error', 'Password reset token is invalid or has expired.');
@@ -176,8 +176,8 @@ exports.changepassword = function(req, res, next) {
               res.json('This user does not exist.');
             }
 
-            console.log("User Email:" + req.user.email);
-            console.log("User password:" + token);
+            console.log("User Email:" + req.email);
+            console.log("User password:" + req.password);
             console.log("Creating new user object");
           
          
@@ -186,7 +186,7 @@ exports.changepassword = function(req, res, next) {
 
             User.update(
               {email:existingUser.email}, 
-              {$set:{password:token,isfirstlogin:"false"}},
+              {$set:{password:req.password,isfirstlogin:"false"}},
               {upsert:false}, 
               function(err, result){
               
