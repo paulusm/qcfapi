@@ -45,14 +45,14 @@ exports.updateprofile = function(req, res, next){
  
     var email = req.email;
 
-    console.log("Updating User Profile");
+    console.log("Updating User Profile:" + email);
     if(!email){
         return res.status(422).send({error: 'You must enter an email address'});
     }
  
     
     User.findOne({email: email}, function(err, existingUser){
- 
+        
         if(err){
             return next(err);
         }
@@ -60,7 +60,7 @@ exports.updateprofile = function(req, res, next){
         if(!existingUser){
             return res.status(422).send({error: 'Cannot find your profile, this user does not exist'});
         }
- 
+        console.log("Found user and updating");
         //add company id check here....
         existingUser.companyid = req.companyid;
         existingUser.forname = req.forename;
@@ -69,7 +69,7 @@ exports.updateprofile = function(req, res, next){
         existingUser.displayname = req.displayname;
         existingUser.imagepath = req.imagepath;
         existingUser.role = req.role;
-        existingUser.isfirstlogin = req.isfirstlogin;
+        //existingUser.isfirstlogin = "false";
  
         existingUser.save(function(err, user){
  
