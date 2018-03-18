@@ -163,27 +163,42 @@ exports.changepassword = function(req, res, next) {
             res.json('This user does not exist.');
           }
 
-          var userInfo = setUserInfo(req.user);
-          
-             res.status(200).json({
+          //User will already be authenticated with old password at this point
+          //Need to change password to newpassword and generate new token
+          //var userInfo = setUserInfo(req.user);
+          var userInfo = new User({
+            email: req.body.email,
+            password: req.body.newpassword,
+            role: req.body.role,
+            forename: req.body.forename,
+            surname: req.body.surname,
+            department: req.body.department,
+            displayname: req.body.displayname,
+            imagepath: req.body.imagepath,
+            companyid: req.body.companyid,
+            isfirstlogin: 'false',
+            resetpasswordtoken: undefined,
+            resetpasswordexpires: undefined
+        });
+             /* res.status(200).json({
                  token: 'JWT ' + generateToken(userInfo),
                  user: userInfo
-             });
+             }); */
 
           //User must be authenticated to call this function to only need to change password...
           //Of course will need to re-authenticate and pass new token back in response
-          user.password = req.body.newpassword;
-          user.resetpasswordtoken = undefined;
-          user.resetpasswordexpires = undefined;
+          //userInfo.password = req.body.newpassword;
+          //userInfo.resetpasswordtoken = undefined;
+          //userInfo.resetpasswordexpires = undefined;
   
-          user.save(function(err) {
+          userInfo.save(function(err) {
 
             if(err){
               res.status(422).json({error: 'No user found.'});
               return next(err);
             }
             //req.logIn(user, function(err) {
-              res.status(200).json({
+              res.status(201).json({
                 token: 'JWT ' + generateToken(userInfo),
                 user: userInfo
               });
