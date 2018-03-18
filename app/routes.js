@@ -16,8 +16,8 @@ CompaniesController = require('./controllers/companies'),
 express = require('express'),
 passportService = require('../config/passport'),
 //multer = require('multer'),
-passport = require('passport'),
-UsersController = require('./controllers/users');
+passport = require('passport');
+//UsersController = require('./controllers/users');
 
 var requireAuth = passport.authenticate('jwt', {session: false}),
     requireLogin = passport.authenticate('local', {session: false});
@@ -48,9 +48,9 @@ module.exports = function(app){
         res.send({ content: 'Success'});
     });
  
-    apiRoutes.use('/users', usersRoutes);
-    usersRoutes.get('/',requireAuth,AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.getUsers);
-    usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
+    //apiRoutes.use('/users', usersRoutes);
+    //usersRoutes.get('/',requireAuth,AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.getUsers);
+    //usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
 
 
     // Todo Routes
