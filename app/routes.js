@@ -9,7 +9,7 @@
 //Note, our behaviours will match the express.Router supported behaviour i.e. Push, Get, Delete, Put, Search etc
 
 var AuthenticationController = require('./controllers/authentication'),
-EventsController = require('./controllers/events'),
+ActivitiesController = require('./controllers/activities'),
 ThemesController = require('./controllers/themes'), 
 FilesController = require('./controllers/files'),
 CompaniesController = require('./controllers/companies'),
@@ -26,7 +26,7 @@ module.exports = function(app){
 
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
-        eventsRoutes = express.Router(),
+        activitiesRoutes = express.Router(),
         themesRoutes = express.Router(),
         companiesRoutes = express.Router(),
         filesRoutes = express.Router();
@@ -52,11 +52,11 @@ module.exports = function(app){
 
 
     // Todo Routes
-    apiRoutes.use('/events', eventsRoutes);
+    apiRoutes.use('/events', activitiesRoutes);
  
-    eventsRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), EventsController.getEvents);
-    eventsRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), EventsController.createEvent);
-    eventsRoutes.delete('/:event_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), EventsController.deleteEvent);
+    activitiesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getEvents);
+    activitiesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createEvent);
+    activitiesRoutes.delete('/:event_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteEvent);
  
     //Causes Routes
     apiRoutes.use('/themes', themesRoutes);
