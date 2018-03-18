@@ -172,7 +172,9 @@ exports.changepassword = function(req, res, next) {
           //Need to change password to newpassword and generate new token
           //var userInfo = setUserInfo(req.user);
           console.log("Creating new user object");
-          var userInfo = new User({
+
+          existingUser.password = req.user.password;
+         /*  var userInfo = new User({
             email: req.user.email,
             password: req.user.password,
             role: existingUser.role,
@@ -185,7 +187,7 @@ exports.changepassword = function(req, res, next) {
             isfirstlogin: 'false',
             resetpasswordtoken: undefined,
             resetpasswordexpires: undefined
-        });
+        }); */
 
 
              /* res.status(200).json({
@@ -199,7 +201,7 @@ exports.changepassword = function(req, res, next) {
           //userInfo.resetpasswordtoken = undefined;
           //userInfo.resetpasswordexpires = undefined;
   
-          userInfo.save(function(err) {
+          existingUser.save(function(err) {
 
             if(err){
               res.status(422).json({error: 'No user found.'});
@@ -207,8 +209,8 @@ exports.changepassword = function(req, res, next) {
             }
             //req.logIn(user, function(err) {
               res.status(201).json({
-                token: 'JWT ' + generateToken(userInfo),
-                user: userInfo
+                token: 'JWT ' + generateToken(existingUser),
+                user: existingUser
               });
               next();
             //});
