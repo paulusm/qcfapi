@@ -156,8 +156,10 @@ exports.roleAuthorization = function(roles){
 
 //change password performs a login first..
 exports.changepassword = function(req, res, next) {
- 
-        User.findById(req.user.email, function(err, existingUser){
+
+  console.log("Changing User Password:"+ JSON.stringify(req.body));
+
+        User.findOne({email:req.user.email}, function(err, existingUser){
           if (!existingUser) {
             //req.flash('error', 'Password reset token is invalid or has expired.');
             console.log("This user does not exist.");
