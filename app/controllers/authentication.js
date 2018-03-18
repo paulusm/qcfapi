@@ -168,48 +168,36 @@ exports.changepassword = function(req, res, next) {
 
           function(token, done) {
             
-            User.findOne({email:req.body.email}, function(err, existingUser){
+            User.findOne({email:req.body.email}, function(err, user){
           
-            if (!existingUser) {
-              //req.flash('error', 'Password reset token is invalid or has expired.');
-              console.log("This user does not exist.");
-              res.json('This user does not exist.');
-            }
-
-            console.log("User Email:" + req.body.email);
-            console.log("User password:" + req.body.password);
-            console.log("Creating new user object");
-          
-         
-            
-          
-
-            User.update(
-              {email:existingUser.email}, 
-              {$set:{password:req.body.password,isfirstlogin:"false"}},
-              {upsert:false}, 
-              function(err, result){
-              
-
-              if(err){
-                res.status(422).json({error: 'Problem Updating User.'});
-                return next(err);
+              if (!user) {
+                //req.flash('error', 'Password reset token is invalid or has expired.');
+                console.log("This user does not exist.");
+                res.json('This user does not exist.');
               }
-                res.status(201).json({
-                  token: 'JWT ' + generateToken(result),
-                  user: result
-              });
 
-            });
+              console.log("User Email:" + req.body.email);
+              console.log("User password:" + req.body.password);
+              console.log("Creating new user object");
+            
+              use.password = req.body.password;
+              user.isfirstlogin = "false";
               
-              return next();
-          
-          });
-      }], function(err) {
-        if (err){
-            next(err);
-            return;
-        } 
+              user.save(function(err) {
+                done(err, token, user);
+              });
+            });
+          },function(token, user, done)
+          {
+             res.status(201).json({
+                  token: 'JWT ' + generateToken(user),
+                  user: user
+              });
+          }], function(err) {
+          if (err){
+            res.status(422).json({error: 'Problem Updating User.'});
+            return next(err);
+          } 
         //res.redirect('/forgot');
       });
                  
