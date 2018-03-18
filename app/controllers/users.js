@@ -1,14 +1,14 @@
-var jwt = require('jsonwebtoken'); 
+//var jwt = require('jsonwebtoken'); 
 var User = require('../models/user');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcrypt-nodejs');
-var User = require('../models/user');
+//var mongoose = require('mongoose');
+//var passport = require('passport');
+//var LocalStrategy = require('passport-local').Strategy;
+//var bcrypt = require('bcrypt-nodejs');
+//var User = require('../models/user');
 //var authConfig = require('../../config/auth');
  
 
-function setUserInfo(request){
+/* function setUserInfo(request){
     return {
         //_id: request._id,
         email: request.email,
@@ -21,7 +21,7 @@ function setUserInfo(request){
         isfirstlogin:request.isfirstlogin
 
     };
-}
+} */
  
  
 //Get all companies from database
@@ -77,10 +77,10 @@ exports.updateprofile = function(req, res, next){
                 return next(err);
             }
  
-            var userInfo = setUserInfo(user);
+            //var userInfo = setUserInfo(user);
  
             res.status(201).json({
-                user: userInfo
+                user: existingUser
             })
  
         });
