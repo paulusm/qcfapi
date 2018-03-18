@@ -180,7 +180,7 @@ exports.changepassword = function(req, res, next) {
               console.log("User password:" + req.body.password);
               console.log("Creating new user object");
             
-              use.password = req.body.password;
+              user.password = req.body.password;
               user.isfirstlogin = "false";
               
               user.save(function(err) {
