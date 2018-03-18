@@ -49,6 +49,7 @@ module.exports = function(app){
     });
  
     apiRoutes.use('/users', usersRoutes);
+    usersRoutes.get('/',requireAuth,AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.getUsers);
     usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
 
 
