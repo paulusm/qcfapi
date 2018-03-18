@@ -32,6 +32,30 @@ var ActivitySchema = new mongoose.Schema({
     companyid:{
         type:String,
         required:true
+    },
+    enddate: {
+        type:Date,
+        required: false
+    },
+    startdate: {
+        type:Date,
+        required:false
+    },
+    mydonateurl: {
+        type:String,
+        required:false
+    },
+    likes: {
+        type:[String],
+        required:false
+    },
+    volunteers: {
+        type:[String],
+        required:false
+    },
+    sponsors: {
+        type:[String],
+        required:false
     }
 
  

@@ -21,7 +21,16 @@ exports.createActivity = function(req, res, next){
         activitydescription : req.body.activitydescription,
         activityowner : req.body.activityowner,
         activitytype : req.body.activitytype,
-        companyid: req.body.companyid
+        companyid: req.body.companyid,
+        donationmatch: req.body.donationmatch,
+        approved : req.body.approved,
+        enddate :req.body.enddate,
+        startdate : req.body.startdate,
+        mydonateurl : req.body.mydonateurl,
+        likes : req.body.likes,
+        volunteers : req.body.volunteers,
+        sponsors : req.body.sponsors
+
     }, function(err, activity) {
  
         if (err){
