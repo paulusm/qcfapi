@@ -63,7 +63,7 @@ exports.updateprofile = function(req, res, next){
         console.log("Found user and updating");
         //add company id check here....
         existingUser.companyid = req.body.companyid;
-        existingUser.forname = req.body.forename;
+        existingUser.forename = req.body.forename;
         existingUser.surname = req.body.surname;
         existingUser.department = req.body.department;
         existingUser.displayname = req.body.displayname;
