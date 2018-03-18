@@ -200,11 +200,11 @@ exports.changepassword = function(req, res, next) {
           //userInfo.password = req.body.newpassword;
           //userInfo.resetpasswordtoken = undefined;
           //userInfo.resetpasswordexpires = undefined;
-  
+   
           existingUser.save(function(err) {
 
             if(err){
-              res.status(422).json({error: 'No user found.'});
+              res.status(422).json({error: 'Problem Updating User.'});
               return next(err);
             }
             //req.logIn(user, function(err) {

@@ -77,7 +77,7 @@ UserSchema.pre('save', function(next){
     }
  
     bcrypt.genSalt(SALT_FACTOR, function(err, salt){
- 
+        console.log("Changing Password");
         if(err){
             return next(err);
         }
@@ -87,7 +87,7 @@ UserSchema.pre('save', function(next){
             if(err){
                 return next(err);
             }
- 
+            console.log("Setting password to new hash");
             user.password = hash;
             next();
  
