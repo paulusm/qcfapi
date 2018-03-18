@@ -5,7 +5,9 @@ var ThemeSchema = new mongoose.Schema({
     name: {
         type:String
     },
-    areas: [String]
+    areas: {
+      type:  [String]
+    } 
 });
 
 

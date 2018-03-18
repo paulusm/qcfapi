@@ -53,7 +53,7 @@ exports.updateprofile = function(req, res, next){
         existingUser.role = req.role;
         existingUser.isfirstlogin = req.isfirstlogin;
  
-        user.save(function(err, user){
+        existingUser.save(function(err, user){
  
             if(err){
                 return next(err);

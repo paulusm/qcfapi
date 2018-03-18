@@ -40,12 +40,17 @@ module.exports = function(app){
     authRoutes.post('/resetchg', AuthenticationController.resetpost)
     authRoutes.post('/login', requireLogin, AuthenticationController.login);
     authRoutes.post('/changepassword', AuthenticationController.changepassword);
-    authRoutes.post('/updateprofile', requireLogin, UsersController.updateprofile);
+
+    
     
     authRoutes.get('/protected', requireAuth, function(req, res){
         res.send({ content: 'Success'});
     });
  
+    apiRoutes.use('/users', usersRoutes);
+    usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
+
+
     // Todo Routes
     apiRoutes.use('/events', eventsRoutes);
  

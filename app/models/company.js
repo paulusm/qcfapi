@@ -19,8 +19,7 @@ var CompanySchema = new mongoose.Schema({
        required: true
    },
    themes: {
-       type:mongoose.Schema.Types.ObjectId,
-       ref:'Theme',
+       type:[String],
        required:false
    }
 
