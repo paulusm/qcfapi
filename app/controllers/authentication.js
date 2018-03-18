@@ -173,7 +173,7 @@ exports.changepassword = function(req, res, next) {
             
           User.update(
             {email:existingUser.email}, 
-            {$set:{email:req.user.password,isfirstlogin:"false"}},
+            {$set:{password:req.user.password,isfirstlogin:"false"}},
             {upsert:false}, 
             function(err, result){
             
