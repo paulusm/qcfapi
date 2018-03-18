@@ -39,7 +39,7 @@ module.exports = function(app){
     //authRoutes.get('/reset/:token', AuthenticationController.resetget)
     authRoutes.post('/resetchg', AuthenticationController.resetpost)
     authRoutes.post('/login', requireLogin, AuthenticationController.login);
-    authRoutes.post('/changepassword', requireLogin, AuthenticationController.changepassword);
+    authRoutes.post('/changepassword', requireAuth, AuthenticationController.changepassword);
     authRoutes.post('/updateprofile', requireLogin, UsersController.updateprofile);
     
     authRoutes.get('/protected', requireAuth, function(req, res){
