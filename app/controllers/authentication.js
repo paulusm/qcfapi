@@ -160,63 +160,38 @@ exports.changepassword = function(req, res, next) {
         console.log("Changing User Password:"+ JSON.stringify(req.body));
 
         User.findOne({email:req.user.email}, function(err, existingUser){
+          
           if (!existingUser) {
             //req.flash('error', 'Password reset token is invalid or has expired.');
             console.log("This user does not exist.");
             res.json('This user does not exist.');
           }
+
           console.log("User Email:" + req.user.email);
           console.log("User password:" + req.user.password);
-          //console.log("User newpassword:" + req.user.password);
-          //User will already be authenticated with old password at this point
-          //Need to change password to newpassword and generate new token
-          //var userInfo = setUserInfo(req.user);
           console.log("Creating new user object");
-
-          existingUser.password = req.user.password;
-         /*  var userInfo = new User({
-            email: req.user.email,
-            password: req.user.password,
-            role: existingUser.role,
-            forename: existingUser.forename,
-            surname: existingUser.surname,
-            department: existingUser.department,
-            displayname: existingUser.displayname,
-            imagepath: existingUser.imagepath,
-            companyid: existingUser.companyid,
-            isfirstlogin: 'false',
-            resetpasswordtoken: undefined,
-            resetpasswordexpires: undefined
-        }); */
-
-
-             /* res.status(200).json({
-                 token: 'JWT ' + generateToken(userInfo),
-                 user: userInfo
-             }); */
-
-          //User must be authenticated to call this function to only need to change password...
-          //Of course will need to re-authenticate and pass new token back in response
-          //userInfo.password = req.body.newpassword;
-          //userInfo.resetpasswordtoken = undefined;
-          //userInfo.resetpasswordexpires = undefined;
-   
-          existingUser.save(function(err, userinfo) {
+            
+          User.update(
+            {email:existingUser.email}, 
+            {$set:{email:req.user.password,isfirstlogin:"false"}},
+            {upsert:false}
+          ), function(err, result){
+            
 
             if(err){
               res.status(422).json({error: 'Problem Updating User.'});
               return next(err);
-            }
-            //req.logIn(user, function(err) {
-              res.status(201).json({
+            }else{res.status(201).json({
                 token: 'JWT ' + generateToken(userinfo),
                 user: userinfo
               });
-              //next();
-            //});
-          });
+            };
+
+          }
         });
-}
+                 
+      }
+
 
 exports.forgot = function(req, res, next) {
     
