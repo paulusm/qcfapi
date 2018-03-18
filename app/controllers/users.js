@@ -43,7 +43,7 @@ exports.getUsers = function(req, res, next){
 
 exports.updateprofile = function(req, res, next){
  
-    var email = req.email;
+    var email = req.body.email;
 
     console.log("Updating User Profile:" + email);
     if(!email){
@@ -62,13 +62,13 @@ exports.updateprofile = function(req, res, next){
         }
         console.log("Found user and updating");
         //add company id check here....
-        existingUser.companyid = req.companyid;
-        existingUser.forname = req.forename;
-        existingUser.surname = req.surname;
-        existingUser.department = req.department;
-        existingUser.displayname = req.displayname;
-        existingUser.imagepath = req.imagepath;
-        existingUser.role = req.role;
+        existingUser.companyid = req.body.companyid;
+        existingUser.forname = req.body.forename;
+        existingUser.surname = req.body.surname;
+        existingUser.department = req.body.department;
+        existingUser.displayname = req.body.displayname;
+        existingUser.imagepath = req.body.imagepath;
+        existingUser.role = req.body.role;
         //existingUser.isfirstlogin = "false";
  
         existingUser.save(function(err, user){
