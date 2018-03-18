@@ -33,7 +33,7 @@ function setUserInfo(request){
 }
 
 function setUserInfoReg(request){
-    console.log("setUserInfo:"+request)
+    console.log("setUserInfoReg:"+request)
     return {
         _id: request.body._id,
         email: request.body.email,
