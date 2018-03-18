@@ -61,7 +61,7 @@ exports.createCompany = function(req, res, next){
 
 exports.updateCompany = function(req, res, next){
     
-    var companyname = req.body.company;
+    var companyname = req.body.companyname;
     
     console.log("Updating Company Profile:" + companyname);
     if(!companyname){
