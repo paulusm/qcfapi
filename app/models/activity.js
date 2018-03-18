@@ -25,7 +25,7 @@ var ActivitySchema = new mongoose.Schema({
         default:0
     },
     approved: {
-        type:boolean,
+        type:Boolean,
         required:false,
         default:false
     },
