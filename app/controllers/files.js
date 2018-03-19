@@ -29,8 +29,11 @@ var gfilename;
 
 exports.getFile = function(req, res){
 
+    console.log("Retrieving Image File: " + req.params.filename );
+    
     gfs.collection('ctFiles'); //set collection name to lookup into
     
+
         /** First check if file exists */
         gfs.files.find({filename: req.params.filename}).toArray(function(err, files){
             if(!files || files.length === 0){
