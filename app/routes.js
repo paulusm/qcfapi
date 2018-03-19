@@ -70,7 +70,7 @@ module.exports = function(app){
     //File Routes
     apiRoutes.use('/files', filesRoutes);
     
-    filesRoutes.get("/file/:filename", requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']),FilesController.getFile);
+    filesRoutes.get("/file/:filename", FilesController.getFile);
     filesRoutes.post('/upload', FilesController.createFile);
     
     apiRoutes.use('/companies', companiesRoutes);
