@@ -159,7 +159,7 @@ exports.roleAuthorization = function(roles){
 //change password performs a login first..
 exports.changepassword = function(req, res, next) {
 
-        console.log("Changing User Password:"+ JSON.stringify(req.body));
+        console.log("Changing User Password:"+ JSON.stringify(req));
         async.waterfall([
           function(done) {
             crypto.randomBytes(20, function(err, buf) {
@@ -170,7 +170,7 @@ exports.changepassword = function(req, res, next) {
 
           function(token, done) {
             
-            User.findOne({email:req.body.email}, function(err, user){
+            User.findOne({email:req.email}, function(err, user){
           
               if (!user) {
                 //req.flash('error', 'Password reset token is invalid or has expired.');
@@ -178,11 +178,11 @@ exports.changepassword = function(req, res, next) {
                 res.json('This user does not exist.');
               }
 
-              console.log("User Email:" + req.body.email);
-              console.log("User password:" + req.body.password);
+              console.log("User Email:" + req.email);
+              console.log("User password:" + req.password);
               console.log("Creating new user object");
             
-              user.password = req.body.password;
+              user.password = req.password;
               user.isfirstlogin = "false";
               
               user.save(function(err) {
