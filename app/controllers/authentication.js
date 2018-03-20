@@ -24,10 +24,11 @@ function setUserInfo(request){
         role: request.role,
         forename:request.forename,
         surname:request.surname,
-        department:request.depart,
+        department:request.department,
         companyid:request.companyid,
         displayname:request.displayname,
-        isfirstlogin:request.isfirstlogin
+        isfirstlogin:request.isfirstlogin,
+        imagepath:request.imagepath
 
     };
 }
@@ -44,7 +45,8 @@ function setUserInfoReg(request){
         companyid:request.body.companyid,
         displayname:request.body.displayname,
         isfirstlogin:request.body.isfirstlogin,
-        password:request.body.password
+        password:request.body.password,
+        imagepath:request.body.imagepath
 
     };
 }
