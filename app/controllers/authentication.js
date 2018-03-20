@@ -159,7 +159,7 @@ exports.roleAuthorization = function(roles){
 //change password performs a login first..
 exports.changepassword = function(req, res, next) {
 
-        console.log("Changing User Password:"+ JSON.stringify(req));
+        console.log("Changing User Password:"+ req);
         async.waterfall([
           function(done) {
             crypto.randomBytes(20, function(err, buf) {
