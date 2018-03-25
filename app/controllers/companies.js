@@ -136,3 +136,26 @@ exports.getCompanyByName = function(req,res,next){
 
         });
 }
+
+exports.getCompanyByID = function(req,res,next){
+    console.log("Before:" + req.params._id);
+    var companyid = decodeURI(req.params._id);
+    console.log("After: " + companyname);
+    Company.findById({_id: companyid}, function(err, existingCompany){
+    
+            if(err){
+                return next(err);
+            }
+    
+            if(!existingCompany){
+                return res.status(422).send({error: 'Cannot find this company, this company does not exist'});
+            }
+
+
+            res.status(201).json({
+                company: existingCompany
+            })
+            //res.json(existingCompany); 
+
+        });
+}
