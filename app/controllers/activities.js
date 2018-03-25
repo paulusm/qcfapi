@@ -114,3 +114,23 @@ exports.deleteActivity = function(req, res, next){
     });
  
 }
+
+exports.getActivitiesUnapproved = function(req,res,next){
+    console.log("Before:" + req.params.company_id);
+    var company_id = decodeURI(req.params.company_id);
+    console.log("After: " + company_id);
+    Activity.find({companyid: company_id,approved:'false'}, function(err, activities){
+    
+            if(err){
+                return next(err);
+            }
+    
+            if(!activities){
+                return res.status(201).send({error: 'All activities approved.'});
+            }
+
+
+            res.status(201).json(activities);
+
+        });
+}

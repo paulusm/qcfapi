@@ -138,9 +138,9 @@ exports.getCompanyByName = function(req,res,next){
 }
 
 exports.getCompanyByID = function(req,res,next){
-    console.log("Before:" + req.params._id);
-    var companyid = decodeURI(req.params._id);
-    console.log("After: " + companyname);
+    console.log("Before:" + req.params.company_id);
+    var companyid = decodeURI(req.params.company_id);
+    console.log("After: " + companyid);
     Company.findById({_id: companyid}, function(err, existingCompany){
     
             if(err){

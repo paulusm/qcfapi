@@ -57,14 +57,15 @@ module.exports = function(app){
     // Activities Routes
     apiRoutes.use('/activities', activitiesRoutes);
  
-    activitiesRoutes.get('/getActivities', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getActivities);
+    activitiesRoutes.get('/getActivitiesUnapproved/:company_id', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), ActivitiesController.getActivitiesUnapproved);
+    activitiesRoutes.get('/getActivities', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), ActivitiesController.getActivities);
     activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
     activitiesRoutes.delete('/deleteActivity/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteActivity);
  
     // Stories Routes
     apiRoutes.use('/stories', storiesRoutes);
 
-    storiesRoutes.get('/getStories', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getStories);
+    storiesRoutes.get('/getStories', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), StoriesController.getStories);
     storiesRoutes.post('/createStory', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.createStory);
     storiesRoutes.post('/updateStory', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.updateStory);
     storiesRoutes.delete('/deleteStory/:story_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.deleteStory);
@@ -72,9 +73,9 @@ module.exports = function(app){
     //Causes Routes
     apiRoutes.use('/themes', themesRoutes);
     
-    themesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ThemesController.getThemes);
-    themesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.createTheme);
-    themesRoutes.delete('/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.deleteTheme);
+    themesRoutes.get('/getThemes', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ThemesController.getThemes);
+    themesRoutes.post('/createTheme', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.createTheme);
+    themesRoutes.delete('/deleteTheme/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.deleteTheme);
     
     //File Routes
     apiRoutes.use('/files', filesRoutes);
@@ -85,7 +86,7 @@ module.exports = function(app){
     apiRoutes.use('/companies', companiesRoutes);
     companiesRoutes.get('/getCompanies', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.getCompanies);
     companiesRoutes.get('/getCompanyByCompanyName/:companyname',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByName);
-    companiesRoutes.get('/getCompanyByCompanyId/:companyid',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByID);
+    companiesRoutes.get('/getCompanyByCompanyId/:company_id',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByID);
     companiesRoutes.post('/createCompany', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.createCompany);
     companiesRoutes.post('/updateCompany', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), CompaniesController.updateCompany);
     
