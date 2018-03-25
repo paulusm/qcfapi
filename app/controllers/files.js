@@ -57,8 +57,8 @@ exports.getFile = function(req, res){
 
 exports.getFiles = function(req, res, next){
     
-    gfs.collection('ctFiles.files'); //set collection name to lookup into
-       gfs.list(function(err, files) {
+    gfs.collection('ctFiles'); //set collection name to lookup into
+       gfs.files.list(function(err, files) {
     
            if (err){
                res.send(err);
