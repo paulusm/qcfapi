@@ -55,6 +55,21 @@ exports.getFile = function(req, res){
 
 }
 
+exports.getFiles = function(req, res, next){
+    
+    gfs.collection('ctFiles'); //set collection name to lookup into
+       gfs.files.find(function(err, files) {
+    
+           if (err){
+               res.send(err);
+           }
+    
+           res.json(files);
+    
+       });
+    
+    }
+
 exports.createFile = function(req, res, next){
 console.log("createFile Running");
     upload(req,res,function(err){

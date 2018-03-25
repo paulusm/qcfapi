@@ -81,6 +81,7 @@ module.exports = function(app){
     apiRoutes.use('/files', filesRoutes);
     
     filesRoutes.get("/file/:filename", FilesController.getFile);
+    filesRoutes.get('/getFiles', FilesController.getFiles);
     filesRoutes.post('/upload', FilesController.createFile);
     
     apiRoutes.use('/companies', companiesRoutes);
