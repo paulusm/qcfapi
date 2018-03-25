@@ -13,9 +13,9 @@ ActivitiesController = require('./controllers/activities'),
 ThemesController = require('./controllers/themes'), 
 FilesController = require('./controllers/files'),
 CompaniesController = require('./controllers/companies'),
+StoriesControlller = require('./controllers/stories'),
 express = require('express'),
 passportService = require('../config/passport'),
-//multer = require('multer'),
 passport = require('passport');
 UsersController = require('./controllers/users');
 
@@ -30,6 +30,7 @@ module.exports = function(app){
         themesRoutes = express.Router(),
         companiesRoutes = express.Router(),
         usersRoutes = express.Router(),
+        storiesRoutes = express.Router(),
         filesRoutes = express.Router();
  
     // Auth Routes
@@ -53,13 +54,21 @@ module.exports = function(app){
     usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
 
 
-    // Todo Routes
+    // Activities Routes
     apiRoutes.use('/activities', activitiesRoutes);
  
     activitiesRoutes.get('/getActivities', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getActivities);
     activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
     activitiesRoutes.delete('/deleteActivity/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteActivity);
  
+    // Stories Routes
+    apiRoutes.use('/stories', storiesRoutes);
+
+    storiesRoutes.get('/getStories', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getStories);
+    storiesRoutes.post('/createStory', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.createStory);
+    storiesRoutes.post('/updateStory', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.updateStory);
+    storiesRoutes.delete('/deleteStory/:story_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.deleteStory);
+
     //Causes Routes
     apiRoutes.use('/themes', themesRoutes);
     
