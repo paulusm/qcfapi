@@ -57,7 +57,7 @@ module.exports = function(app){
     // Activities Routes
     apiRoutes.use('/activities', activitiesRoutes);
  
-    activitiesRoutes.get('/getActivitiesUnapproved/:company_id', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), ActivitiesController.getActivitiesUnapproved);
+    activitiesRoutes.get('/getActivitiesUnapproved/:company_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.getActivitiesUnapproved);
     activitiesRoutes.get('/getActivities', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), ActivitiesController.getActivities);
     activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
     activitiesRoutes.delete('/deleteActivity/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteActivity);
