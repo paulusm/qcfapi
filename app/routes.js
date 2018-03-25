@@ -56,9 +56,9 @@ module.exports = function(app){
     // Todo Routes
     apiRoutes.use('/activities', activitiesRoutes);
  
-    activitiesRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getActivities);
-    activitiesRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
-    activitiesRoutes.delete('/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteActivity);
+    activitiesRoutes.get('/getActivities', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getActivities);
+    activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
+    activitiesRoutes.delete('/deleteActivity/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteActivity);
  
     //Causes Routes
     apiRoutes.use('/themes', themesRoutes);
