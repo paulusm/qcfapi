@@ -63,7 +63,7 @@ exports.getFiles = function(req, res, next){
            if (err){
                res.send(err);
            }
-           console.log(files);
+           //console.log(files);
            res.json(files);
     
        });
