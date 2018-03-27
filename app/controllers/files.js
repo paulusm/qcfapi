@@ -87,6 +87,7 @@ console.log("createFile Running");
 exports.deleteFile = function(req, res, next){
 
    File.remove({
+       //console.log("Image Removed Successfully");
        _id : req.params.file_id
    }, function(err, file) {
        res.json(file);
