@@ -248,7 +248,7 @@ exports.forgot = function(req, res, next) {
         });
         var mailOptions = {
           to: user.email,
-          from: 'al_dewar@hotmail.com',
+          from: 'uwegroupc@gmail.com',
           subject: 'Node.js Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following code:\n\n' +
@@ -318,7 +318,7 @@ exports.forgot = function(req, res, next) {
           });
           var mailOptions = {
             to: user.email,
-            from: 'al_dewar@hotmail.com',
+            from: 'uwegroupc@gmail.com',
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
