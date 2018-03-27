@@ -236,7 +236,7 @@ exports.forgot = function(req, res, next) {
       function(token, user, done) {
         var smtpTransport = nodemailer.createTransport({
           //host:"smtp-mail.outlook.com",
-          service: 'gmail',
+          service: 'Gmail',
           //port:587,
           //tls:{
           //    ciphers:'SSLv3'
@@ -250,7 +250,7 @@ exports.forgot = function(req, res, next) {
           to: user.email,
           from: 'uwegroupc@gmail.com',
           subject: 'Node.js Password Reset',
-          text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          html: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following code:\n\n' +
             token + '\n\n' +
             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
@@ -306,7 +306,7 @@ exports.forgot = function(req, res, next) {
       },
       function(user, done) {
         var smtpTransport = nodemailer.createTransport({
-          service: 'gmail',
+          service: 'Gmail',
           //port:587,
           //tls:{
           //    ciphers:'SSLv3'
@@ -320,7 +320,7 @@ exports.forgot = function(req, res, next) {
             to: user.email,
             from: 'uwegroupc@gmail.com',
           subject: 'Your password has been changed',
-          text: 'Hello,\n\n' +
+          html: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
