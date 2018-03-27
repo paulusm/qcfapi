@@ -83,7 +83,8 @@ module.exports = function(app){
     filesRoutes.get("/file/:filename", FilesController.getFile);
     filesRoutes.get('/getFiles', FilesController.getFiles);
     filesRoutes.post('/upload', FilesController.createFile);
-    
+    filesRoutes.delete('deleteFile/:file_id',requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),FilesController.deleteFile);
+
     apiRoutes.use('/companies', companiesRoutes);
     companiesRoutes.get('/getCompanies', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.getCompanies);
     companiesRoutes.get('/getCompanyByCompanyName/:companyname',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), CompaniesController.getCompanyByName);
