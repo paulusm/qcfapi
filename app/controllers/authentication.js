@@ -236,7 +236,9 @@ exports.forgot = function(req, res, next) {
       function(token, user, done) {
         var smtpTransport = nodemailer.createTransport({
           //host:"smtp-mail.outlook.com",
-          service: 'Gmail',
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true, // use SSL
           //port:587,
           //tls:{
           //    ciphers:'SSLv3'
@@ -306,7 +308,9 @@ exports.forgot = function(req, res, next) {
       },
       function(user, done) {
         var smtpTransport = nodemailer.createTransport({
-          service: 'Gmail',
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true, // use SSL
           //port:587,
           //tls:{
           //    ciphers:'SSLv3'
