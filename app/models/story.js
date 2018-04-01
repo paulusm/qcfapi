@@ -36,7 +36,7 @@ var StorySchema = new mongoose.Schema({
     default: 'Article'
    },
    approved:{
-       type:boolean,
+       type:Boolean,
        required:true,
        default:false
    }
