@@ -19,7 +19,7 @@ exports.getApprovedStories = function(req, res, next){
     var companyid = req.params.company_id;
     console.log("CompanyID:" + companyid);
 
-       Story.find({$or:[{companyid: company_id},{companyid:'5ab7dbc0bc24e3001440543c'}],approved:'true'},function(err, stories) {
+       Story.find({$or:[{companyid: companyid},{companyid:'5ab7dbc0bc24e3001440543c'}],approved:'true'},function(err, stories) {
     
            if (err){
                res.send(err);
