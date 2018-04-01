@@ -92,15 +92,18 @@ exports.createStory = function(req, res, next){
 
 exports.updateStory = function(req, res, next){
    
-      var storytitle = req.body.storyauthor;
+    console.log(req.body);
+      var storytitle = req.body.storytitle;
       var companyid = "";
       
-          if(req.body.companyid == null){
-              companyid = "5ab7dbc0bc24e3001440543c";
-          }else{
-              companyid = req.body.companyid;
-          }
-      console.log("Updating Story:" + storytitle);
+        if(req.body.companyid == null){
+            companyid = "5ab7dbc0bc24e3001440543c";
+        }else{
+            companyid = req.body.companyid;
+        }
+     
+        console.log("Updating Story:" + storytitle);
+
       if(!storytitle){
           return res.status(422).send({error: 'You must enter an storytitle'});
       }
