@@ -72,7 +72,10 @@ module.exports = function(app){
     // Stories Routes
     apiRoutes.use('/stories', storiesRoutes);
 
-    storiesRoutes.get('/getStories', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getStories);
+    storiesRoutes.get('/getStories', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), StoriesController.getStories);
+    storiesRoutes.get('/getApprovedStories/:company_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getStories);
+    storiesRoutes.get('/getunapprovedStories/:company_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getStories);
+    
     storiesRoutes.post('/createStory', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.createStory);
     storiesRoutes.post('/updateStory', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.updateStory);
     storiesRoutes.delete('/deleteStory/:story_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.deleteStory);
