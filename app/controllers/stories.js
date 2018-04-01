@@ -92,14 +92,14 @@ exports.createStory = function(req, res, next){
 
 exports.updateStory = function(req, res, next){
    
-    console.log(req.body);
-      var storytitle = req.body.storytitle;
+    console.log(req.body.story);
+      var storytitle = req.body.story.storytitle;
       var companyid = "";
       
-        if(req.body.companyid == null){
+        if(req.body.story.companyid == null){
             companyid = "5ab7dbc0bc24e3001440543c";
         }else{
-            companyid = req.body.companyid;
+            companyid = req.body.story.companyid;
         }
      
         console.log("Updating Story:" + storytitle);
@@ -120,15 +120,15 @@ exports.updateStory = function(req, res, next){
           }
           console.log("Found story and updating");
           //add company id check here....
-          existingStory.storytitle = req.body.storytitle;
-          existingStory.story = req.body.story;
-          existingStory.themeid = req.body.themeid;
-          existingStory.imagepath = req.body.imagepath;
-          existingStory.storyauthor = req.body.storyauthor;
-          existingStory.publiseddate = req.body.publisheddate;
-          existingStory.likes = req.body.likes;
-          existingStory.type = req.body.type;
-          existingStory.approved = req.body.approved;
+          existingStory.storytitle = req.body.story.storytitle;
+          existingStory.story = req.body.story.story;
+          existingStory.themeid = req.body.story.themeid;
+          existingStory.imagepath = req.body.story.imagepath;
+          existingStory.storyauthor = req.body.story.storyauthor;
+          existingStory.publiseddate = req.body.story.publisheddate;
+          existingStory.likes = req.body.story.likes;
+          existingStory.type = req.body.story.type;
+          existingStory.approved = req.body.story.approved;
           existingStory.companyid = companyid;
           
           
