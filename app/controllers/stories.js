@@ -16,6 +16,14 @@ exports.getStories = function(req, res, next){
 
 exports.createStory = function(req, res, next){
 
+    var companyid = "";
+
+    if(req.body.companyid == null){
+        companyid = "5ab7dbc0bc24e3001440543c";
+    }else{
+        companyid = req.body.companyid;
+    }
+
    Story.create({
        storytitle : req.body.storytitle,
        story : req.body.story,
@@ -25,7 +33,8 @@ exports.createStory = function(req, res, next){
        publisheddate: req.body.publisheddate,
        likes : req.body.likes,
        type :req.body.type,
-       approved: false
+       approved: false,
+       companyid:companyid
       
 
    }, function(err, story) {
@@ -51,7 +60,13 @@ exports.createStory = function(req, res, next){
 exports.updateStory = function(req, res, next){
    
       var storytitle = req.body.storyauthor;
-  
+      var companyid = "";
+      
+          if(req.body.companyid == null){
+              companyid = "5ab7dbc0bc24e3001440543c";
+          }else{
+              companyid = req.body.companyid;
+          }
       console.log("Updating Story:" + storytitle);
       if(!storytitle){
           return res.status(422).send({error: 'You must enter an storytitle'});
@@ -78,6 +93,7 @@ exports.updateStory = function(req, res, next){
           existingStory.likes = req.body.likes;
           existingStory.type = req.body.type;
           existingStory.approved = req.body.approved;
+          existingStory.companyid = companyid;
           
           
    

@@ -39,6 +39,10 @@ var StorySchema = new mongoose.Schema({
        type:Boolean,
        required:true,
        default:false
+   },
+   companyid:{
+       type:String,
+       required:true
    }
 }, {
     timestamps: true
