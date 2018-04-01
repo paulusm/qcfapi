@@ -24,7 +24,8 @@ exports.createStory = function(req, res, next){
        storyauthor: req.body.storyauthor,
        publisheddate: req.body.publisheddate,
        likes : req.body.likes,
-       type :req.body.type
+       type :req.body.type,
+       approved: false
       
 
    }, function(err, story) {
@@ -76,6 +77,7 @@ exports.updateStory = function(req, res, next){
           existingStory.publiseddate = req.body.publisheddate;
           existingStory.likes = req.body.likes;
           existingStory.type = req.body.type;
+          existingStory.approved = req.body.approved;
           
           
    

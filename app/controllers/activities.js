@@ -137,7 +137,7 @@ exports.getActivitiesUnapproved = function(req,res,next){
         });
 }
 
-exports.getFutureActivitiesApprovedByCompanyID(req, res, next){
+exports.getFutureActivitiesApprovedByCompanyID = function(req, res, next){
     //console.log("Before:" + req.params.company_id);
     var company_id = decodeURI(req.params.company_id);
     //console.log("After: " + company_id);
@@ -158,7 +158,7 @@ exports.getFutureActivitiesApprovedByCompanyID(req, res, next){
         });
 }
 
-exports.getActivityByOwnerID(req.res,next){
+exports.getActivityByOwnerID = function(req,res,next){
     //console.log("Before:" + req.params.company_id);
     var company_id = decodeURI(req.params.owner_id);
     //console.log("After: " + company_id);

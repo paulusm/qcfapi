@@ -34,6 +34,11 @@ var StorySchema = new mongoose.Schema({
     type: String,
     enum: ['Article','News','Story'],
     default: 'Article'
+   },
+   approved:{
+       type:boolean,
+       required:true,
+       default:false
    }
 }, {
     timestamps: true
