@@ -92,7 +92,7 @@ exports.createStory = function(req, res, next){
 
 exports.updateStory = function(req, res, next){
    
-    console.log(req.body.story);
+    console.log(req);
       var storytitle = req.body.story.storytitle;
       var companyid = "";
       
