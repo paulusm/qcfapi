@@ -35,7 +35,7 @@ exports.getApprovedStories = function(req, res, next){
         console.log("Starting unaproved Retrieval");
         var companyid = req.params.company_id;
         console.log("CompanyID:" + companyid);
-           Story.find({$or:[{companyid: company_id},{companyid:'5ab7dbc0bc24e3001440543c'}],approved:'false'}, function(err, stories) {
+           Story.find({$or:[{companyid: companyid},{companyid:'5ab7dbc0bc24e3001440543c'}],approved:'false'}, function(err, stories) {
         
                if (err){
                    res.send(err);
