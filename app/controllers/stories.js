@@ -15,8 +15,9 @@ exports.getStories = function(req, res, next){
 }
 
 exports.getApprovedStories = function(req, res, next){
+    console.log("Starting Approved Retrieval");
     var companyid = req.params.company_id;
-
+    console.log("CompanyID:" + companyid);
 
        Story.find({$or:[{companyid: company_id},{companyid:'5ab7dbc0bc24e3001440543c'}],approved:'true'},function(err, stories) {
     
@@ -31,7 +32,9 @@ exports.getApprovedStories = function(req, res, next){
     }
 
     exports.getUnapprovedStories = function(req, res, next){
+        console.log("Starting unaproved Retrieval");
         var companyid = req.params.company_id;
+        console.log("CompanyID:" + companyid);
            Story.find({$or:[{companyid: company_id},{companyid:'5ab7dbc0bc24e3001440543c'}],approved:'false'}, function(err, stories) {
         
                if (err){
