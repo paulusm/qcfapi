@@ -14,6 +14,7 @@ exports.getActivities = function(req, res, next){
  
 }
  
+//Can be called by Employee as approval is default to False....
 exports.createActivity = function(req, res, next){
  
     Activity.create({
@@ -23,7 +24,7 @@ exports.createActivity = function(req, res, next){
         activitytype : req.body.activitytype,
         companyid: req.body.companyid,
         donationmatch: req.body.donationmatch,
-        approved : req.body.approved,
+        approved : false,
         enddate :req.body.enddate,
         startdate : req.body.startdate,
         mydonateurl : req.body.mydonateurl,
@@ -51,6 +52,8 @@ exports.createActivity = function(req, res, next){
  
 }
  
+
+//Can only be called by Business Admin as will handle approval....
 exports.updateActivity = function(req, res, next){
     
        var activityname = req.body.activity;
@@ -85,8 +88,7 @@ exports.updateActivity = function(req, res, next){
            existingActivity.likes = req.body.likes;
            existingActivity.volunteers = req.body.volunteers;
            existingActivity.sponsors = req.body.sponsors;
-           //existingUser.isfirstlogin = "false";
-    
+           
            existingActivity.save(function(err, activity){
     
                if(err){
@@ -134,3 +136,97 @@ exports.getActivitiesUnapproved = function(req,res,next){
 
         });
 }
+
+exports.getFutureActivitiesApprovedByCompanyID(req, res, next){
+    //console.log("Before:" + req.params.company_id);
+    var company_id = decodeURI(req.params.company_id);
+    //console.log("After: " + company_id);
+    var today = new Date();
+    Activity.find({companyid: company_id,approved:'false', "startdate":{"$lt":today}}, function(err, activities){
+    
+            if(err){
+                return next(err);
+            }
+    
+            if(!activities){
+                return res.status(201).send({error: 'No future activities found.'});
+            }
+
+
+            res.status(201).json(activities);
+
+        });
+}
+
+exports.getActivityByOwnerID(req.res,next){
+    //console.log("Before:" + req.params.company_id);
+    var company_id = decodeURI(req.params.owner_id);
+    //console.log("After: " + company_id);
+    Activity.find({activityowner: company_id}, function(err, activities){
+    
+            if(err){
+                return next(err);
+            }
+    
+            if(!activities){
+                return res.status(201).send({error: 'You have no activities in your name.'});
+            }
+
+
+            res.status(201).json(activities);
+
+        });
+}
+
+//Can be called by Employee's as only updates Likes, Volunteers and Sponsors...
+exports.updateActivityAsEmployee = function(req, res, next){
+    
+       var activity = req.body.activity;
+   
+       console.log("Updating Activity:" + activity._id);
+    
+       
+       Activity.findOne({_id: activity._id}, function(err, existingActivity){
+           
+           if(err){
+               return next(err);
+           }
+    
+           if(!existingActivity){
+               return res.status(422).send({error: 'Cannot find your activity.'});
+           }
+           console.log("Found activity and updating");
+           //add company id check here....
+           //existingActivity.activityname = req.body.activityname;
+           //existingActivity.activitydescription = req.body.activitydescription;
+           //existingActivity.activityowner = req.body.surname;
+           //existingActivity.activitytype = req.body.department;
+           //existingActivity.donationmatch = req.body.displayname;
+           //existingActivity.approved = req.body.imagepath;
+           //existingActivity.companyid = req.body.companyid;
+           //existingActivity.enddate = req.body.enddate;
+           //existingActivity.startdate = req.body.startdate;
+           //existingActivity.mydonateurl = req.body.mydonateurl;
+           existingActivity.likes = req.body.likes;
+           existingActivity.volunteers = req.body.volunteers;
+           existingActivity.sponsors = req.body.sponsors;
+           //existingUser.isfirstlogin = "false";
+    
+           existingActivity.save(function(err, activity){
+    
+               if(err){
+                   return next(err);
+               }
+    
+               //var userInfo = setUserInfo(user);
+    
+               res.status(201).json({
+                   activity: existingActivity
+               })
+    
+           });
+    
+       });
+    
+   }
+
