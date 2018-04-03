@@ -236,21 +236,22 @@ exports.forgot = function(req, res, next) {
       function(token, user, done) {
         var smtpTransport = nodemailer.createTransport({
           //host:"smtp-mail.outlook.com",
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true, // use SSL
+          host: 'smtp-mail.outlook.com',
+          secureConnection:false,
+          port: 587,
+          //secure: true, // use SSL
           //port:587,
           //tls:{
           //    ciphers:'SSLv3'
           //},
           auth: {
-            user: 'uwegroupc@gmail.com',
-            pass: '"uwegroupc2018'
+            user: 'alistair2.dewar@live.uwe.ac.uk',
+            pass: '6e77ACKR'
           }
         });
         var mailOptions = {
           to: user.email,
-          from: 'uwegroupc@gmail.com',
+          from: 'alistair2.dewar@live.uwe.ac.uk',
           subject: 'Node.js Password Reset',
           html: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following code:\n\n' +
@@ -308,21 +309,23 @@ exports.forgot = function(req, res, next) {
       },
       function(user, done) {
         var smtpTransport = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true, // use SSL
+          //host:"smtp-mail.outlook.com",
+          host: 'smtp-mail.outlook.com',
+          secureConnection:false,
+          port: 587,
+          //secure: true, // use SSL
           //port:587,
           //tls:{
           //    ciphers:'SSLv3'
           //},
           auth: {
-            user: 'uwegroupc@gmail.com',
-            pass: '"uwegroupc2018'
+            user: 'alistair2.dewar@live.uwe.ac.uk',
+            pass: '6e77ACKR'
           }
-          });
+        });
           var mailOptions = {
             to: user.email,
-            from: 'uwegroupc@gmail.com',
+            from: 'alistair2.dewar@live.uwe.ac.uk',
           subject: 'Your password has been changed',
           html: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
