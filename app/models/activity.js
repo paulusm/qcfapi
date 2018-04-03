@@ -56,6 +56,14 @@ var ActivitySchema = new mongoose.Schema({
     sponsors: {
         type:[String],
         required:false
+    },
+    location:{
+        type:String,
+        required:false
+    },
+    address: {
+        type:String,
+        required:false
     }
 
  

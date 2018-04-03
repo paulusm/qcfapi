@@ -30,7 +30,9 @@ exports.createActivity = function(req, res, next){
         mydonateurl : req.body.mydonateurl,
         likes : req.body.likes,
         volunteers : req.body.volunteers,
-        sponsors : req.body.sponsors
+        sponsors : req.body.sponsors,
+        location : req.body.location,
+        address : req.body.address
 
     }, function(err, activity) {
  
