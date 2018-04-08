@@ -80,10 +80,10 @@ exports.updateActivity = function(req, res, next){
            //add company id check here....
            existingActivity.activityname = req.body.activityname;
            existingActivity.activitydescription = req.body.activitydescription;
-           existingActivity.activityowner = req.body.surname;
-           existingActivity.activitytype = req.body.department;
-           existingActivity.donationmatch = req.body.displayname;
-           existingActivity.approved = req.body.imagepath;
+           existingActivity.activityowner = req.body.activityowner;
+           existingActivity.activitytype = req.body.activitytype;
+           existingActivity.donationmatch = req.body.donationmatch;
+           existingActivity.approved = req.body.approved;
            existingActivity.companyid = req.body.companyid;
            existingActivity.enddate = req.body.enddate;
            existingActivity.startdate = req.body.startdate;
