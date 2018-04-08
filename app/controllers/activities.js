@@ -59,7 +59,7 @@ exports.createActivity = function(req, res, next){
 //Can only be called by Business Admin as will handle approval....
 exports.updateActivity = function(req, res, next){
     
-       var activityname = req.body.activity;
+       var activityname = req.body.activityname;
    
        console.log("Updating Activity:" + activityname);
        if(!activityname){
