@@ -32,7 +32,8 @@ exports.createActivity = function(req, res, next){
         volunteers : req.body.volunteers,
         sponsors : req.body.sponsors,
         location : req.body.location,
-        address : req.body.address
+        address : req.body.address,
+        filename: req.body.filename
 
     }, function(err, activity) {
  
@@ -90,6 +91,7 @@ exports.updateActivity = function(req, res, next){
            existingActivity.likes = req.body.likes;
            existingActivity.volunteers = req.body.volunteers;
            existingActivity.sponsors = req.body.sponsors;
+           existingActivity.filename = req.body.filename;
            
            existingActivity.save(function(err, activity){
     
@@ -144,7 +146,7 @@ exports.getFutureActivitiesApprovedByCompanyID = function(req, res, next){
     var company_id = decodeURI(req.params.company_id);
     //console.log("After: " + company_id);
     var today = new Date();
-    Activity.find({companyid: company_id,approved:'false', "startdate":{"$lt":today}}, function(err, activities){
+    Activity.find({companyid: company_id,approved:'true', "startdate":{"$gt":today}}, function(err, activities){
     
             if(err){
                 return next(err);
@@ -209,9 +211,9 @@ exports.updateActivityAsEmployee = function(req, res, next){
            //existingActivity.enddate = req.body.enddate;
            //existingActivity.startdate = req.body.startdate;
            //existingActivity.mydonateurl = req.body.mydonateurl;
-           existingActivity.likes = req.body.likes;
-           existingActivity.volunteers = req.body.volunteers;
-           existingActivity.sponsors = req.body.sponsors;
+           existingActivity.likes = req.body.activity.likes;
+           existingActivity.volunteers = req.body.activity.volunteers;
+           existingActivity.sponsors = req.body.activity.sponsors;
            //existingUser.isfirstlogin = "false";
     
            existingActivity.save(function(err, activity){

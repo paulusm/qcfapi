@@ -15,7 +15,7 @@ var ActivitySchema = new mongoose.Schema({
         required: true
     },
     activitytype: {
-        type: String,
+        type: [String],
         enum: ['Volunteering','Sponsorship','Other'],
         default: 'Other'
     },
@@ -62,6 +62,10 @@ var ActivitySchema = new mongoose.Schema({
         required:false
     },
     address: {
+        type:String,
+        required:false
+    },
+    filename: {
         type:String,
         required:false
     }

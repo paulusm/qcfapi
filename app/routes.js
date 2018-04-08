@@ -63,7 +63,7 @@ module.exports = function(app){
     activitiesRoutes.get('/getActivityByOwnerID/:owner_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.getActivityByOwnerID);
     
     
-    activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
+    activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
     activitiesRoutes.post('/updateActivity',requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.updateActivity);
     activitiesRoutes.post('/updateActivityAsEmployee',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.updateActivityAsEmployee);
     
