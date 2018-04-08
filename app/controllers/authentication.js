@@ -28,7 +28,9 @@ function setUserInfo(request){
         companyid:request.companyid,
         displayname:request.displayname,
         isfirstlogin:request.isfirstlogin,
-        imagepath:request.imagepath
+        imagepath:request.imagepath,
+        about:request.about,
+        jobtitle:request.jobtitle
 
     };
 }
@@ -46,7 +48,9 @@ function setUserInfoReg(request){
         displayname:request.body.displayname,
         isfirstlogin:request.body.isfirstlogin,
         password:request.body.password,
-        imagepath:request.body.imagepath
+        imagepath:request.body.imagepath,
+        about:request.body.about,
+        jobtitle:request.body.jobtitle
 
     };
 }
@@ -107,7 +111,9 @@ exports.register = function(req, res, next){
             displayname: userinfo.displayname,
             imagepath: userinfo.imagepath,
             companyid: userinfo.companyid,
-            isfirstlogin: 'true'
+            isfirstlogin: 'true',
+            about: userinfo.about,
+            jobtitle:userinfo.jobtitle
         });
         console.log('Saving User Object');
         user.save(function(err, userinfo){

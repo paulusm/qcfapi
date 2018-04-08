@@ -61,6 +61,14 @@ var UserSchema = new mongoose.Schema({
     imagepath:{
         type:String,
         required:false
+    },
+    about: {
+        type:String,
+        required:false
+    },
+    jobtitle:{
+        type:String,
+        required:false
     }
  
 }, {
