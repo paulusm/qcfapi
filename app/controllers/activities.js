@@ -125,6 +125,24 @@ exports.getActivitiesUnapproved = function(req,res,next){
     console.log("Before:" + req.params.company_id);
     var company_id = decodeURI(req.params.company_id);
     console.log("After: " + company_id);
+    //if QCF, Get All Unapproved
+    if(company_id == '5ab7dbc0bc24e3001440543c')
+    {
+        Activity.find({approved:'false'}, function(err, activities){
+            
+                    if(err){
+                        return next(err);
+                    }
+            
+                    if(!activities){
+                        return res.status(201).send({error: 'All activities approved.'});
+                    }
+        
+        
+                    res.status(201).json(activities);
+        
+                });
+    }else{
     Activity.find({companyid: company_id,approved:'false'}, function(err, activities){
     
             if(err){
@@ -139,6 +157,7 @@ exports.getActivitiesUnapproved = function(req,res,next){
             res.status(201).json(activities);
 
         });
+    }
 }
 
 exports.getFutureActivitiesApprovedByCompanyID = function(req, res, next){
