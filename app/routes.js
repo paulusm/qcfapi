@@ -64,7 +64,9 @@ module.exports = function(app){
     
     
     activitiesRoutes.post('/createActivity', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.createActivity);
-    activitiesRoutes.post('/updateActivity',requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.updateActivity);
+    activitiesRoutes.post('/updateActivity',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.updateActivity);
+    activitiesRoutes.post('/approveActivity',requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.approveActivity);
+    
     activitiesRoutes.post('/updateActivityAsEmployee',requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ActivitiesController.updateActivityAsEmployee);
     
     activitiesRoutes.delete('/deleteActivity/:activity_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ActivitiesController.deleteActivity);

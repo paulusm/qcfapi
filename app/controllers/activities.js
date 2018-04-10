@@ -59,15 +59,15 @@ exports.createActivity = function(req, res, next){
 //Can only be called by Business Admin as will handle approval....
 exports.updateActivity = function(req, res, next){
     
-       var activityname = req.body.activityname;
-   
-       console.log("Updating Activity:" + activityname);
+       var activityid = req.body._id;
+        var activityname = req.body.activityname;
+       console.log("Updating Activity:" + activityid);
        if(!activityname){
            return res.status(422).send({error: 'You must enter an activityname'});
        }
     
        
-       Activity.findOne({activityname: activityname}, function(err, existingActivity){
+       Activity.findOne({_id: activityid}, function(err, existingActivity){
            
            if(err){
                return next(err);
@@ -83,7 +83,7 @@ exports.updateActivity = function(req, res, next){
            existingActivity.activityowner = req.body.activityowner;
            existingActivity.activitytype = req.body.activitytype;
            existingActivity.donationmatch = req.body.donationmatch;
-           existingActivity.approved = req.body.approved;
+           existingActivity.approved = false;
            existingActivity.companyid = req.body.companyid;
            existingActivity.enddate = req.body.enddate;
            existingActivity.startdate = req.body.startdate;
@@ -110,6 +110,59 @@ exports.updateActivity = function(req, res, next){
        });
     
    }
+
+exports.approveActivity = function(req, res, next){
+    var activityid = req.body._id;
+    var activityname = req.body.activityname;
+   console.log("Updating Activity:" + activityid);
+   //if(!activityname){
+   //    return res.status(422).send({error: 'You must enter an activityname'});
+   //}
+
+   
+   Activity.findOne({_id: activityid}, function(err, existingActivity){
+       
+       if(err){
+           return next(err);
+       }
+
+       if(!existingActivity){
+           return res.status(422).send({error: 'Cannot find your activity.'});
+       }
+       console.log("Found activity and updating");
+       //add company id check here....
+       //existingActivity.activityname = req.body.activityname;
+       //existingActivity.activitydescription = req.body.activitydescription;
+       //existingActivity.activityowner = req.body.activityowner;
+       //existingActivity.activitytype = req.body.activitytype;
+       //existingActivity.donationmatch = req.body.donationmatch;
+       existingActivity.approved = false;
+       //existingActivity.companyid = req.body.companyid;
+       //existingActivity.enddate = req.body.enddate;
+       //existingActivity.startdate = req.body.startdate;
+       //existingActivity.mydonateurl = req.body.mydonateurl;
+       //existingActivity.likes = req.body.likes;
+       //existingActivity.volunteers = req.body.volunteers;
+       //existingActivity.sponsors = req.body.sponsors;
+       //existingActivity.filename = req.body.filename;
+       
+       existingActivity.save(function(err, activity){
+
+           if(err){
+               return next(err);
+           }
+
+           //var userInfo = setUserInfo(user);
+
+           res.status(201).json({
+               activity: existingActivity
+           })
+
+       });
+
+   });
+
+}
 
 exports.deleteActivity = function(req, res, next){
  
