@@ -204,12 +204,12 @@ exports.getActivityByOwnerID = function(req,res,next){
 //Can be called by Employee's as only updates Likes, Volunteers and Sponsors...
 exports.updateActivityAsEmployee = function(req, res, next){
     
-       var activity = req.body.activity;
+       var activityid = req.body._id;
    
-       console.log("Updating Activity:" + activity._id);
+       console.log("Updating Activity:" + activityid);
     
        
-       Activity.findOne({_id: activity._id}, function(err, existingActivity){
+       Activity.findOne({_id: activityid}, function(err, existingActivity){
            
            if(err){
                return next(err);
@@ -230,9 +230,9 @@ exports.updateActivityAsEmployee = function(req, res, next){
            //existingActivity.enddate = req.body.enddate;
            //existingActivity.startdate = req.body.startdate;
            //existingActivity.mydonateurl = req.body.mydonateurl;
-           existingActivity.likes = req.body.activity.likes;
-           existingActivity.volunteers = req.body.activity.volunteers;
-           existingActivity.sponsors = req.body.activity.sponsors;
+           existingActivity.likes = req.body.likes;
+           existingActivity.volunteers = req.body.volunteers;
+           existingActivity.sponsors = req.body.sponsors;
            //existingUser.isfirstlogin = "false";
     
            existingActivity.save(function(err, activity){
