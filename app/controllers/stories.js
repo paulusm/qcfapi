@@ -92,9 +92,10 @@ exports.createStory = function(req, res, next){
 
 exports.updateStory = function(req, res, next){
    
-    console.log(req.body.storytitle);
-      var storytitle = req.body.storytitle;
-      var companyid = "";
+        console.log(req.body.storytitle);
+        var storytitle = req.body.storytitle;
+        var storyid = req.body._id;
+        var companyid = "";
       
         if(req.body.companyid == null){
             companyid = "5ab7dbc0bc24e3001440543c";
@@ -109,7 +110,7 @@ exports.updateStory = function(req, res, next){
       }
    
       
-      Story.findOne({storytitle: storytitle}, function(err, existingStory){
+      Story.findOne({_id: storyid}, function(err, existingStory){
           
           if(err){
               return next(err);
