@@ -62,13 +62,13 @@ exports.createCompany = function(req, res, next){
 exports.updateCompany = function(req, res, next){
     
     var companyname = req.body.companyname;
-    
+    var companyid = req.body._id;
     console.log("Updating Company Profile:" + companyname);
     if(!companyname){
         return res.status(422).send({error: 'You must enter a company name'});
     }
 
-    Company.findOne({companyname: companyname},function(err, company) {
+    Company.findOne({_id: companyid},function(err, company) {
         
                if (err){
                    return next(err);
