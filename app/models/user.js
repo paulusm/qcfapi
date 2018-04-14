@@ -5,13 +5,13 @@ var UserSchema = new mongoose.Schema({
  
     forename:{
         type:String,
-        lowercase:true,
+        lowercase:false,
         unique:false,
         required:false
     },
     surname:{
         type:String,
-        lowercase:true,
+        lowercase:false,
         unique:false,
         required:false
     },
