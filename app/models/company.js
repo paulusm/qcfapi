@@ -21,6 +21,10 @@ var CompanySchema = new mongoose.Schema({
    themes: {
        type:[String],
        required:false
+   },
+   colourtheme: {
+       type:String,
+       required:false
    }
 
 }, {

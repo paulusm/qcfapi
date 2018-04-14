@@ -86,6 +86,7 @@ exports.updateCompany = function(req, res, next){
                 company.email = req.body.email;
                 company.filename = req.body.filename;
                 company.themes = req.body.themes;
+                company.colourtheme = req.body.colourtheme;
 
                 company.save(function(err, company){
     
