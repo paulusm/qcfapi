@@ -18,6 +18,7 @@ express = require('express'),
 passportService = require('../config/passport'),
 passport = require('passport');
 UsersController = require('./controllers/users');
+FaqsController = require('./controllers/faqs');
 
 var requireAuth = passport.authenticate('jwt', {session: false}),
     requireLogin = passport.authenticate('local', {session: false});
@@ -31,7 +32,8 @@ module.exports = function(app){
         companiesRoutes = express.Router(),
         usersRoutes = express.Router(),
         storiesRoutes = express.Router(),
-        filesRoutes = express.Router();
+        filesRoutes = express.Router(),
+        faqsRoutes = express.Router();
  
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
@@ -104,9 +106,11 @@ module.exports = function(app){
     companiesRoutes.post('/createCompany', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']),CompaniesController.createCompany);
     companiesRoutes.post('/updateCompany', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), CompaniesController.updateCompany);
     
-    //companiesRoutes.delete();
-
-
+    apiRoutes.use('/faqs',faqsRoutes);
+    faqsRoutes.get('/getFaqs', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']),FaqsController.getFaqs);
+    faqsRoutes.post('/createFaq', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']),CompaniesController.createFaq);
+    faqsRoutes.post('/updateFaq', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), CompaniesController.updateFaq);
+    
     // Set up routes
     app.use('/api', apiRoutes);
  

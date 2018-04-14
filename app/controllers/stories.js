@@ -57,6 +57,18 @@ exports.createStory = function(req, res, next){
         companyid = req.body.companyid;
     }
 
+    if(!req.body.storytitle){
+        return res.status(422).send({error: 'You must enter a title for this article.'});
+    }
+
+    if(!req.body.story){
+        return res.status(422).send({error: 'You must enter some details for this article.'});
+    }
+
+    if(!req.body.type){
+        return res.status(422).send({error: 'You must select a type for this article.'});
+    }
+
    Story.create({
        storytitle : req.body.storytitle,
        story : req.body.story,
