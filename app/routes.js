@@ -108,8 +108,8 @@ module.exports = function(app){
     
     apiRoutes.use('/faqs',faqsRoutes);
     faqsRoutes.get('/getFaqs', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']),FaqsController.getFaqs);
-    faqsRoutes.post('/createFaq', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']),CompaniesController.createFaq);
-    faqsRoutes.post('/updateFaq', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), CompaniesController.updateFaq);
+    faqsRoutes.post('/createFaq', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']),FaqsController.createFaq);
+    faqsRoutes.post('/updateFaq', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), FaqsController.updateFaq);
     
     // Set up routes
     app.use('/api', apiRoutes);
