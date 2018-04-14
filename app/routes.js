@@ -79,7 +79,7 @@ module.exports = function(app){
     storiesRoutes.get('/getUnapprovedStories/:company_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getUnapprovedStories);
     
     storiesRoutes.post('/createStory', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.createStory);
-    storiesRoutes.post('/updateStory', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.updateStory);
+    storiesRoutes.post('/updateStory', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.updateStory);
     storiesRoutes.delete('/deleteStory/:story_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.deleteStory);
 
     //Causes Routes

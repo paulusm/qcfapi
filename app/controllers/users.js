@@ -69,6 +69,8 @@ exports.updateprofile = function(req, res, next){
         existingUser.displayname = req.body.displayname;
         existingUser.imagepath = req.body.imagepath;
         existingUser.role = req.body.role;
+        existingUser.about = req.body.about;
+        existingUser.jobtitle = req.body.jobtitle;
         //existingUser.isfirstlogin = "false";
  
         existingUser.save(function(err, user){
