@@ -55,7 +55,8 @@ module.exports = function(app){
     usersRoutes.get('/',requireAuth,AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.getUsers);
     usersRoutes.get('/getUsersByCompanyId/:company_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']),UsersController.getUsersByCompanyId);
     usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
-
+    usersRoutes.delete('/deleteUser/:user_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), UsersController.deleteUser);
+    
 
     // Activities Routes
     apiRoutes.use('/activities', activitiesRoutes);

@@ -91,4 +91,12 @@ exports.updateprofile = function(req, res, next){
 
         });
 }
- 
+exports.deleteUser = function(req, res, next){
+    
+       
+   User.remove({
+        _id : req.params.user_id
+    }, function(err, user) {
+        res.json(user);
+    });
+    }
