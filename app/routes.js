@@ -78,6 +78,7 @@ module.exports = function(app){
 
     storiesRoutes.get('/getStories', requireAuth, AuthenticationController.roleAuthorization(['QCFAdmin']), StoriesController.getStories);
     storiesRoutes.get('/getApprovedStories/:company_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getApprovedStories);
+    storiesRoutes.get('/getStoriesByCompanyId/:company_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), StoriesController.getStoriesByCompanyId);
     storiesRoutes.get('/getUnapprovedStories/:company_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.getUnapprovedStories);
     
     storiesRoutes.post('/createStory', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), StoriesController.createStory);
