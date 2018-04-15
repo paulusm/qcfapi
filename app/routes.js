@@ -88,6 +88,7 @@ module.exports = function(app){
     apiRoutes.use('/themes', themesRoutes);
     
     themesRoutes.get('/getThemes', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ThemesController.getThemes);
+    themesRoutes.get('/getThemeById/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), ThemesController.getThemeById);
     themesRoutes.post('/createTheme', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.createTheme);
     themesRoutes.delete('/deleteTheme/:theme_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']), ThemesController.deleteTheme);
     
