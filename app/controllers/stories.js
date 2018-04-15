@@ -96,7 +96,7 @@ exports.createStory = function(req, res, next){
        publisheddate: req.body.publisheddate,
        likes : req.body.likes,
        type :req.body.type,
-       approved: false,
+       approved: req.body.approved,
        companyid:companyid
       
 
