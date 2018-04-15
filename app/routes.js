@@ -53,7 +53,7 @@ module.exports = function(app){
  
     apiRoutes.use('/users', usersRoutes);
     usersRoutes.get('/',requireAuth,AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.getUsers);
-    usersRoutes.get('/getUsersByCompanyId/:company_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']),UsersController.getUsersByCompanyId);
+    //usersRoutes.get('/getUsersByCompanyId/:company_id', requireAuth, AuthenticationController.roleAuthorization(['BusinessAdmin','QCFAdmin']),UsersController.getUsersByCompanyId);
     usersRoutes.post('/updateprofile', requireAuth, AuthenticationController.roleAuthorization(['Employee','BusinessAdmin','QCFAdmin']), UsersController.updateprofile);
 
 

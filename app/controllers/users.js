@@ -68,12 +68,12 @@ exports.updateprofile = function(req, res, next){
  
 }
 
-exports.getUsersByCompanyID = function(req, res, next){
+/* exports.getUsersByCompanyID = function(req, res, next){
 
-    console.log("Before:" + req.params.company_id);
+    //console.log("Before:" + req.params.company_id);
     var companyid = decodeURI(req.params.company_id);
-    console.log("After: " + companyid);
-    
+    //console.log("After: " + companyid);
+
     User.find({companyid: companyid}, function(err, users){
     
             if(err){
@@ -88,5 +88,5 @@ exports.getUsersByCompanyID = function(req, res, next){
             res.status(201).json(users);
 
         });
-}
+} */
  
