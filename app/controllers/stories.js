@@ -17,8 +17,8 @@ exports.getStories = function(req, res, next){
 exports.getStoriesByCompanyId = function(req, res, next){
 
    
-    var companyid = req.params.company_id;
-    
+    var companyid = decodeURI(req.params.company_id);
+    console.log(companyid);
 
        Story.find([{companyid: companyid}],function(err, stories) {
     
