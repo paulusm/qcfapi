@@ -10,7 +10,7 @@ var StorySchema = new mongoose.Schema({
     type: String,
     required: true
    },
-   thememid: {
+   themeid: {
     type: String,
     required: false
    },
