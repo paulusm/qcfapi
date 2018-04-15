@@ -1,28 +1,5 @@
 //var jwt = require('jsonwebtoken'); 
 var User = require('../models/user');
-//var mongoose = require('mongoose');
-//var passport = require('passport');
-//var LocalStrategy = require('passport-local').Strategy;
-//var bcrypt = require('bcrypt-nodejs');
-//var User = require('../models/user');
-//var authConfig = require('../../config/auth');
- 
-
-/* function setUserInfo(request){
-    return {
-        //_id: request._id,
-        email: request.email,
-        role: request.role,
-        forname:request.forname,
-        surname:request.surname,
-        department:request.depart,
-        companyid:request.companyid,
-        displayname:request.displayname,
-        isfirstlogin:request.isfirstlogin
-
-    };
-} */
- 
  
 //Get all companies from database
 exports.getUsers = function(req, res, next){
@@ -89,5 +66,25 @@ exports.updateprofile = function(req, res, next){
  
     });
  
+}
+
+exports.getUsersByCompanyID = function(req,res,next){
+    console.log("Before:" + req.params.company_id);
+    var companyid = decodeURI(req.params.company_id);
+    console.log("After: " + companyid);
+    User.find({companyid: companyid}, function(err, users){
+    
+            if(err){
+                return next(err);
+            }
+    
+            if(!users){
+                return res.status(422).send({error: 'Cannot find any users for this company.'});
+            }
+
+
+            res.json(users);
+
+        });
 }
  
