@@ -149,6 +149,7 @@ exports.updateStory = function(req, res, next){
           existingStory.save(function(err, story){
    
               if(err){
+                console.log("Error updating story.");
                   return next(err);
               }
    
