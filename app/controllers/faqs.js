@@ -95,7 +95,7 @@ exports.updateFaq = function(req, res, next){
           }
           console.log("Found faq and updating");
           //add company id check here....
-          existingFaq.storytitle = req.body.faqtitle;
+          existingFaq.faqtitle = req.body.faqtitle;
           existingFaq.faq = req.body.faq;
           existingFaq.imagepath = req.body.imagepath;
           existingFaq.companyid = companyid;

@@ -33,7 +33,10 @@ exports.createActivity = function(req, res, next){
         sponsors : req.body.sponsors,
         location : req.body.location,
         address : req.body.address,
-        filename: req.body.filename
+        filename: req.body.filename,
+        targetamount : req.body.targetamount,
+        targethours :  req.body.targethours,
+        status : 'Open'
 
     }, function(err, activity) {
  
@@ -94,7 +97,13 @@ exports.updateActivity = function(req, res, next){
            existingActivity.volunteers = req.body.volunteers;
            existingActivity.sponsors = req.body.sponsors;
            existingActivity.filename = req.body.filename;
-           
+           existingActivity.targetamount = req.body.targetamount;
+           existingActivity.totalamount = req.body.totalamount;
+           existingActivity.targethours = req.body.targethours;
+           existingActivity.totalhours = req.body.totalhours;
+           existingActivity.status = req.body.status;
+           existingActivity.feedback = req.body.feedback;
+
            existingActivity.save(function(err, activity){
     
                if(err){
@@ -220,7 +229,7 @@ exports.getFutureActivitiesApprovedByCompanyID = function(req, res, next){
     var company_id = decodeURI(req.params.company_id);
     //console.log("After: " + company_id);
     var today = new Date();
-    Activity.find({companyid: company_id,approved:'true', "startdate":{"$gt":today}}, function(err, activities){
+    Activity.find({companyid: company_id,approved:'true', "enddate":{"$gt":today}}, function(err, activities){
     
             if(err){
                 return next(err);

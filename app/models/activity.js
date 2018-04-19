@@ -68,7 +68,33 @@ var ActivitySchema = new mongoose.Schema({
     filename: {
         type:String,
         required:false
+    }, 
+    targetamount: {
+        type: Number,
+        required :false
+    },
+    totalamount: {
+        type:Number,
+        required:false
+    },
+    feedback: {
+        type:String,
+        required:false
+    },
+    status: {
+        type: [String],
+        enum: ['Open','Closed','Deleted'],
+        default: 'Open'
+    },
+    targethours: {
+        type:Number,
+        required:false
+    },
+    totalhours: {
+        type:Number,
+        required:false
     }
+
 
  
 }, {
