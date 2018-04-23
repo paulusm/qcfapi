@@ -63,7 +63,8 @@ exports.updateCompany = function(req, res, next){
     
     var companyname = req.body.companyname;
     var companyid = req.body._id;
-    console.log("Updating Company Profile:" + companyname);
+    console.log("Updating Company Profile:" + companyname + "ID:" + companyid);
+   
     if(!companyname){
         return res.status(422).send({error: 'You must enter a company name'});
     }
@@ -71,11 +72,13 @@ exports.updateCompany = function(req, res, next){
     Company.findOne({_id: companyid},function(err, company) {
         
                if (err){
+                console.log("Updating Company Error");
                    return next(err);
                }
         
 
                if(!company){
+                console.log("Cannot find company to update");
                 return res.status(422).send({error: 'Cannot find your company.'});
                 }
 
@@ -91,6 +94,7 @@ exports.updateCompany = function(req, res, next){
                 company.save(function(err, company){
     
                 if(err){
+                    console.log("Updating Company Error2");
                     return next(err);
                 }
     

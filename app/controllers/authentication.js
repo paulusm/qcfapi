@@ -10,12 +10,14 @@ var bcrypt = require('bcrypt-nodejs');
 var async = require('async');
 var crypto = require('crypto');
 
+//Create new token used for JWT authentication
 function generateToken(user){
     return jwt.sign(user, authConfig.secret, {
         expiresIn: 10080
     });
 }
  
+//Utility method for mapping user data
 function setUserInfo(request){
     console.log("setUserInfo:"+request)
     return {
@@ -35,6 +37,7 @@ function setUserInfo(request){
     };
 }
 
+//Slightly modified utility method for mapping data at registration
 function setUserInfoReg(request){
     console.log("setUserInfoReg:"+request)
     return {
@@ -68,6 +71,7 @@ exports.login = function(req, res, next){
  
 }
  
+//Register new user in application with validation methods
 exports.register = function(req, res, next){
  
     console.log("Registering New User:"+ JSON.stringify(req.body));
@@ -136,6 +140,7 @@ exports.register = function(req, res, next){
  
 }
  
+//Called when need to check role of a user within a call to a particular Route
 exports.roleAuthorization = function(roles){
  
     return function(req, res, next){
@@ -212,6 +217,10 @@ exports.changepassword = function(req, res, next) {
       }
 
 
+//Method called to manage forgot password request.
+//Checks for validity than creates and sends email with token 
+//that has been stored on account to validate the final reset.     
+//NOTE:Interesting use of async framework to avoid embedding multiple function.
 exports.forgot = function(req, res, next) {
     
     console.log('Starting forgot');
@@ -226,7 +235,6 @@ exports.forgot = function(req, res, next) {
           console.log(req.body.email);
         User.findOne({ email: req.body.email }, function(err, user) {
           if (!user) {
-            //req.flash('error', 'No account with that email address exists.');
             console.log('Nothing Found');
             return JSON.stringify('No account with that email address exists.');
           }
@@ -241,15 +249,9 @@ exports.forgot = function(req, res, next) {
       },
       function(token, user, done) {
         var smtpTransport = nodemailer.createTransport({
-          //host:"smtp-mail.outlook.com",
           host: 'smtp-mail.outlook.com',
           secureConnection:false,
           port: 587,
-          //secure: true, // use SSL
-          //port:587,
-          //tls:{
-          //    ciphers:'SSLv3'
-          //},
           auth: {
             user: 'alistair2.dewar@live.uwe.ac.uk',
             pass: '6e77ACKR'
@@ -268,7 +270,6 @@ exports.forgot = function(req, res, next) {
             console.log('SendMail Found');
           res.json('An e-mail has been sent to ' + user.email + ' with further instructions.');
           next();
-          //done(err, 'done');
         });
       }
     ], function(err) {
@@ -276,14 +277,13 @@ exports.forgot = function(req, res, next) {
           next(err);
           return;
       } 
-      //res.redirect('/forgot');
     });
   };
 
+  //I think this is now redundent.
   exports.resetget = function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
-        //req.flash('error', 'Password reset token is invalid or has expired.');
         res.json('No account with that email address exists.');
       }
       res.status(201).json({
@@ -293,12 +293,12 @@ exports.forgot = function(req, res, next) {
     };
   
 
+  //Performs tha password reset before sending confirmation email.
   exports.resetpost = function(req, res) {
     async.waterfall([
       function(done) {
         User.findOne({ resetpasswordtoken: req.body.token, resetpasswordexpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
-            //req.flash('error', 'Password reset token is invalid or has expired.');
             res.json('Password reset token is invalid or has expired.');
           }
   
@@ -307,23 +307,15 @@ exports.forgot = function(req, res, next) {
           user.resetpasswordexpires = undefined;
   
           user.save(function(err) {
-            //req.logIn(user, function(err) {
               done(err, user);
-            //});
           });
         });
       },
       function(user, done) {
         var smtpTransport = nodemailer.createTransport({
-          //host:"smtp-mail.outlook.com",
           host: 'smtp-mail.outlook.com',
           secureConnection:false,
           port: 587,
-          //secure: true, // use SSL
-          //port:587,
-          //tls:{
-          //    ciphers:'SSLv3'
-          //},
           auth: {
             user: 'alistair2.dewar@live.uwe.ac.uk',
             pass: '6e77ACKR'
@@ -337,12 +329,10 @@ exports.forgot = function(req, res, next) {
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-          //req.flash('success', 'Success! Your password has been changed.');
           done(err);
         });
       }
     ], function(err) {
-      //res.redirect('/');
       res.json('Password reset complete.');
     });
   };

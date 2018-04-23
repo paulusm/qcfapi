@@ -68,8 +68,6 @@ exports.updateprofile = function(req, res, next){
  
 }
 
-
-
  exports.getUsersByCompanyId = function(req, res, next){
 
     //console.log("Before:" + req.params.company_id);
