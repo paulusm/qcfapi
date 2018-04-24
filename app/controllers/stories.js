@@ -49,6 +49,20 @@ exports.getApprovedStories = function(req, res, next){
     
     }
 
+    exports.getAllApprovedStories = function(req, res, next){
+            
+           Story.find({approved:'true'},function(err, stories) {
+        
+               if (err){
+                   res.send(err);
+               }
+        
+               res.json(stories);
+        
+           });
+        
+        }
+        
 exports.getUnapprovedStories = function(req, res, next){
     console.log("Starting unaproved Retrieval");
     var companyid = req.params.company_id;
